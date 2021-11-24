@@ -2,9 +2,9 @@ Package: pald
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("Katherine", "Moore", , "kmoore@amherst.edu", role = c("aut", "cre"),
+    c(person("Katherine", "Moore", , "kmoore@amherst.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6943-2416")),
-    person("Kenneth", "Berenhaut", , "berenhks@wfu.edu", role = c("aut", "cre"))
+    person("Kenneth", "Berenhaut", , "berenhks@wfu.edu", role = c("aut")))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -15,3 +15,7 @@ Depends:
 LazyData: true
 URL: https://github.com/moorekatherine/pald
 BugReports: https://github.com/moorekatherine/pald/issues
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

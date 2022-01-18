@@ -3,7 +3,7 @@
 \docType{data}
 \name{exdata2}
 \alias{exdata2}
-\title{Example data 2}
+\title{Example Data 2}
 \format{
 A data frame with 16 rows and 2 variables.
 }
@@ -11,7 +11,7 @@ A data frame with 16 rows and 2 variables.
 exdata2
 }
 \description{
-A dataset consisting of 16 points (in 2-dimensional Euclidean space)
-for the purposes of example
+A data set consisting of 16 points (in 2-dimensional Euclidean space)
+to provide an illustrative example.  This data is displayed in Figure 2 in BMM22.
 }
 \keyword{datasets}

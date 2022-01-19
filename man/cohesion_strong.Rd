@@ -31,7 +31,7 @@ cohesion_strong(C)
 C_strong<-C
 C_strong[C < strong_threshold(C)]<-0 #C_strong is equal to cohesion_strong(C, symmetric = FALSE)
 C_strong_sym<-pmin(C_strong, t(C_strong)) #C_strong_sym is equal to cohesion_strong(C)
-#The graph whose adjacency is CS is the graph of strong ties (i.e., the cluster graph)
+#The (cluster) graph whose adjacency matrix, CS, is the matrix of strong ties
 CS<-cohesion_strong(C)
 library(igraph)
 G_strong <- simplify(graph.adjacency(CS, weighted = TRUE, mode = "undirected"))

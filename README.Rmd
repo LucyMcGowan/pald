@@ -163,7 +163,7 @@ par(new=TRUE)
 plot_community_graphs(C, layout = exdata2, show.labels = FALSE, vertex.size = 3)
 dist_cohesion_plot(D, cex = .8, weak_gray=TRUE)
 ```
-Rather than showing both pairs, $(d(x, y), C[x, w])$ and $(d(x, y), C[w, x])$ as distinct points in the plot, setting `mutual = TRUE` will only plot mutual cohesion, that is the set of points with x-coordinate $d(x, y)$ and y-coordinate  $\min\{C[x, w], C[w, x]\}$.  
+Rather than showing both pairs, (d(x, y), C(x, w)) and (d(x, y), C(w, x)) as distinct points in the plot, setting `mutual = TRUE` will only plot mutual cohesion, that is the set of points with x-coordinate d(x, y) and y-coordinate  min{C(x, w), C(w, x)}.  
 
 ```{r}
 par(pty = "s")

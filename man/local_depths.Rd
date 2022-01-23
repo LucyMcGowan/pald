@@ -18,7 +18,7 @@ A vector of local depths.
 Creates a vector of local depths from a matrix of distances (or 'dist' object).
 }
 \details{
-Local depth is an interpretable probability which reflects aspects of relative position and centrality via distance comparasions (i.e., d(z, x) < d(z, y)).
+Local depth is an interpretable probability which reflects aspects of relative position and centrality via distance comparisons (i.e., d(z, x) < d(z, y)).
 The average of the local depth values is always 1/2.  Cohesion is partitioned local depth (see \code{cohesion_matrix}); the row-sums of the cohesion matrix are the values of local depth.
 One can optionally provide a pre-computed cohesion matrix using the optional input 'is.cohesion = TRUE'.
 }

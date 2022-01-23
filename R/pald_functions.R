@@ -9,7 +9,7 @@ library(igraph, graphics)
 #'
 #'
 #' Computes the matrix of (pairwise) cohesion values, C_xw, from a matrix of pairwise distances or 'dist' object. Cohesion is an interpretable probability that reflects the strength of alignment of a point, w, to another point, x.
-#' The rows of the cohesion matrix can be seen as providing neighborhood weights.  These values may be used for defining associated weighted graphs (for the purposes of community analysis) as in BMM22.
+#' The rows of the cohesion matrix can be seen as providing neighborhood weights.  These values may be used for defining associated weighted graphs (for the purpose of community analysis) as in BMM22.
 #'
 #' Given an n x n distance matrix, the sum of the entries in the resulting cohesion matrix is always equal to n/2.
 #' Cohesion is partitioned local depth (see `local_depths`) and thus the row sums of the cohesion matrix provide a measure of local depth centrality.
@@ -25,7 +25,7 @@ library(igraph, graphics)
 #' #neighbor weights (provided by cohesion) for the 8th point in exdata1
 #' C[8, ]
 #' localdepths<-rowSums(C)
-#' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(3), 2022.
+#' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
 #'
 #' @export
 cohesion_matrix <- function(D) {
@@ -60,7 +60,7 @@ cohesion_matrix <- function(D) {
 #'
 #' Creates a vector of local depths from a matrix of distances (or 'dist' object).
 #'
-#' Local depth is an interpretable probability which reflects aspects of relative position and centrality via distance comparasions (i.e., d(z, x) < d(z, y)).
+#' Local depth is an interpretable probability which reflects aspects of relative position and centrality via distance comparisons (i.e., d(z, x) < d(z, y)).
 #' The average of the local depth values is always 1/2.  Cohesion is partitioned local depth (see `cohesion_matrix`); the row-sums of the cohesion matrix are the values of local depth.
 #' One can optionally provide a pre-computed cohesion matrix using the optional input 'is.cohesion = TRUE'.
 #'
@@ -104,7 +104,7 @@ local_depths <- function(D, is.cohesion = FALSE) {
 #' which(C[4, ] > strong_threshold(C))
 #' C[4, c(2, 3, 4, 6)] #cohesion values can provide neighbor weights
 #'
-#' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(3), 2022.
+#' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
 #'
 #' @export
 strong_threshold <- function(C) {
@@ -119,7 +119,7 @@ strong_threshold <- function(C) {
 #'
 #' The threshold is that provided by strong_threshold (and is equal to half of the average of the diagonal of C).
 #' Values of the cohesion matrix which are less than the threshold are set to zero.
-#' The symmetrization, if desired, is computed using the entry-wise minimum of C and the transpose of C (i.e., min(C_ij, C_ji)).
+#' The symmetrization, if desired, is computed using the entry-wise (parallel) minimum of C and ts transpose (i.e., min(C_ij, C_ji)).
 #' The matrix provided by cohesion_strong (with default symmetric = TRUE) is the adjacency matrix for the graph of strong ties (the cluster graph), see `community_graphs` and `pald`.
 #'
 #' @param C A matrix of cohesion values (see `cohesion_matrix`).
@@ -152,14 +152,14 @@ cohesion_strong <- function(C, symmetric = TRUE) {
 
 #' Community Graphs
 #'
-#' Provides the graphs whose edge weights are (mutual) cohesion together with a graph layout.
+#' Provides the graphs whose edge weights are (mutual) cohesion, together with a graph layout.
 #'
-#' Constructs the graph objects whose edge weights are (mutual) cohesion (see `cohesion_matrix`), self-loops are removed.
-#' The graph G has adjacency matrix equal to the symmetrized cohesion matrix (using the entry-wise minimum of C and its transpose).
+#' Constructs the graphs whose edge weights are (mutual) cohesion (see `cohesion_matrix`), self-loops are removed.
+#' The graph G has adjacency matrix equal to the symmetrized cohesion matrix (using the entry-wise parallel minimum of C and its transpose).
 #' The graph G_strong has adjacency matrix equal to the thresholded and symmetrized cohesion matrix (see `cohesion_strong`).  The threshold is equal to half of the average of the diagonal of the
 #' cohesion matrix (see `strong_threshold`).
 #'
-#' A layout is also computed using the Fructerman Reingold (FR) force-directed graph drawing algorithm.  As a result, it will provide a somewhat different layout each time it is run.
+#' A layout is also computed using the Fruchterman-Reingold (FR) force-directed graph drawing algorithm.  As a result, it may provide a somewhat different layout each time it is run.
 #'
 #' @param C A matrix of cohesion values (see `cohesion_matrix`).
 #' @return A list consisting of:
@@ -198,8 +198,8 @@ community_graphs <- function(C) {
 #'
 #' Provides a plot of the community graphs, with connected components of the graph of strong ties colored by connected component.
 #'
-#' Plots the community graph, G, with the sub-graph of strong ties emphasized and colored by connected component.  If no layout is provided, the Fructerman-Reingold (FR) graph drawing algorithm is used.
-#' Note that the FR graph drawing algorithm provides a somewhat different layout each time it is run.  You can also access and save a given graph layout using `community_graphs(C)$layout`.
+#' Plots the community graph, G, with the sub-graph of strong ties emphasized and colored by connected component.  If no layout is provided, the Fruchterman-Reingold (FR) graph drawing algorithm is used.
+#' Note that the FR graph drawing algorithm may provide a somewhat different layout each time it is run.  You can also access and save a given graph layout using `community_graphs(C)$layout`.
 #' The example below shows how to display only a subset of vertex labels.
 #'
 #' Note that the parameter `emph_strong` is for visualization purposes only and does not influence the network layout.
@@ -211,7 +211,7 @@ community_graphs <- function(C) {
 #' @param emph_strong The numeric factor by which the edge widths of strong ties are emphasized in the display; the default is 2.
 #' @param edge.width.factor Modify to change displayed edge widths.
 #' @param vertex.lab A vector containing label names.
-#' @param colors A vector of display colors, if none is given a default is provided.
+#' @param colors A vector of display colors, if none is given a default list (of length 24) is provided.
 #' @param vertex.size A numeric value for vertex size.
 #' @param vertex.color.vec A vector of colors names for coloring vertices.
 #' @param vertex.label.cex A numeric value for modifying the vertex label size.
@@ -240,7 +240,7 @@ plot_community_graphs <- function(C, layout = NULL, show.labels = TRUE, only_str
   if (length(layout) == 0) {
     layout <- c_graphs$layout
   }
-  # if no vector of color names is given, a default list is given
+  # if no vector of color names is given, a default list (of length 24) is given
   if (length(colors) == 0) {
     colors <- c("#5F4690", "#73AF48", "#1D6996", "#CC503E", "#38A6A5", "#EDAD08", "#994E95","#0F8554",   "#CC6677", "#E17C05", "#94346E",  "#666666", "#88CCEE", "#AA4499","#117733", "#332288", "#44AA99","#6F4070", "#999933",  "#DDCC77","#882255", "#661100", "#6699CC", "#888888")
   }
@@ -268,7 +268,7 @@ plot_community_graphs <- function(C, layout = NULL, show.labels = TRUE, only_str
 #' To avoid unnecessary computation when creating visualizations, use the function `cohesion_matrix` to
 #' compute the cohesion matrix which may then be taken as input for `local_depths`,
 #' `strong_threshold`, `cohesion_strong`, `community_graphs`,
-#' and `plot_community_graphs`.  For further detail about each component, see the documentation for each of the above functions.
+#' and `plot_community_graphs`.  For further details regarding each component, see the documentation for each of the above functions.
 #'
 #'
 #' @param D A dist object or matrix of pairwise distances.
@@ -288,13 +288,13 @@ plot_community_graphs <- function(C, layout = NULL, show.labels = TRUE, only_str
 #'         \item C: the matrix of cohesion values
 #'        \item  local_depths: a vector of local depths
 #'        \item clusters: a vectors of (community) cluster labels
-#'       \item  threshold: the threshold above which cohesion is consider
+#'       \item  threshold: the threshold above which cohesion is considered
 #'       particularly strong
 #'        \item  C_strong: the thresholded matrix of cohesion values
 #'      \item   G: the graph whose edges weights are mutual cohesion
 #'       \item  G_strong: the weighted graph whose edges are those for
 #'       which cohesion is particularly strong
-#'       \item  layout: a FR force-directedlayout associated with G
+#'       \item  layout: a FR force-directed layout associated with G
 #' }
 #' @examples
 #' D <- dist(exdata2)
@@ -309,7 +309,7 @@ plot_community_graphs <- function(C, layout = NULL, show.labels = TRUE, only_str
 #' pald_languages<-pald(cognate_dist)
 #' head(pald_languages$local_depths)
 #'
-#' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(3), 2022.
+#' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
 #'
 #' @export
 pald <- function(D, show.plot = TRUE, layout = NULL, show.labels = TRUE, only_strong = FALSE,
@@ -323,22 +323,22 @@ pald <- function(D, show.plot = TRUE, layout = NULL, show.labels = TRUE, only_st
     )
   }
 
-  return(list(C = C, local_depths = local_depths(C), clusters= clusters(C_graphs$G_strong)$membership, threshold = strong_threshold(C), C_strong = cohesion_strong(C), G = C_graphs$G, G_strong = C_graphs$G_strong, layout = C_graphs$layout))
+  return(list(C = C, local_depths = local_depths(C, is.cohesion=TRUE), clusters= clusters(C_graphs$G_strong)$membership, threshold = strong_threshold(C), C_strong = cohesion_strong(C), G = C_graphs$G, G_strong = C_graphs$G_strong, layout = C_graphs$layout))
 }
 
 
 #' Distance Cohesion Plot
 #'
-#' Provides a plot of cohesion against distance with the threshold indicated by a horizontal line.
+#' Provides a plot of cohesion against distance, with the threshold indicated by a horizontal line.
 #'
 #' The plot of cohesion against distance provides a visualization for the manner in which distance is transformed.
 #' The threshold distinguishing strong and weak ties is indicated by a horizontal line.
-#' When there are separated regions with different density, one observes vertical bands of color, see example below and BMM22.  For each distance pair in D,
+#' When there are separated regions with different density, one can often observe vertical bands of color, see example below and BMM22.  For each distance pair in D,
 #' the corresponding value of cohesion is computed.  If the pair is within a single cluster, the point is colored
 #' (with the same color provided by the pald and plot_community_graph functions).  Weak ties appear below the threshold.
 #'
 #' Note that cohesion is not symmetric, and so all n^2 points are plotted.  A gray point above the threshold corresponds to a pair in which the value of cohesion is greater than
-#' the threshold in only one direction.  If one only wants to observe mutual cohesion (i.e., cohesion made symmetric using the minimum),
+#' the threshold in only one direction.  If one only wants to observe mutual cohesion (i.e., cohesion made symmetric via the minimum),
 #' set "mutual=TRUE".
 #'
 #' @param D A matrix of distance values.

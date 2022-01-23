@@ -18,15 +18,15 @@ A list consisting of:
 }
 }
 \description{
-Provides the graphs whose edge weights are (mutual) cohesion together with a graph layout.
+Provides the graphs whose edge weights are (mutual) cohesion, together with a graph layout.
 }
 \details{
-Constructs the graph objects whose edge weights are (mutual) cohesion (see \code{cohesion_matrix}), self-loops are removed.
-The graph G has adjacency matrix equal to the symmetrized cohesion matrix (using the entry-wise minimum of C and its transpose).
+Constructs the graphs whose edge weights are (mutual) cohesion (see \code{cohesion_matrix}), self-loops are removed.
+The graph G has adjacency matrix equal to the symmetrized cohesion matrix (using the entry-wise parallel minimum of C and its transpose).
 The graph G_strong has adjacency matrix equal to the thresholded and symmetrized cohesion matrix (see \code{cohesion_strong}).  The threshold is equal to half of the average of the diagonal of the
 cohesion matrix (see \code{strong_threshold}).
 
-A layout is also computed using the Fructerman Reingold (FR) force-directed graph drawing algorithm.  As a result, it will provide a somewhat different layout each time it is run.
+A layout is also computed using the Fruchterman-Reingold (FR) force-directed graph drawing algorithm.  As a result, it may provide a somewhat different layout each time it is run.
 }
 \examples{
 C <- cohesion_matrix(dist(exdata2))

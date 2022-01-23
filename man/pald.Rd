@@ -50,13 +50,13 @@ A list consisting of:
 \item C: the matrix of cohesion values
 \item  local_depths: a vector of local depths
 \item clusters: a vectors of (community) cluster labels
-\item  threshold: the threshold above which cohesion is consider
+\item  threshold: the threshold above which cohesion is considered
 particularly strong
 \item  C_strong: the thresholded matrix of cohesion values
 \item   G: the graph whose edges weights are mutual cohesion
 \item  G_strong: the weighted graph whose edges are those for
 which cohesion is particularly strong
-\item  layout: a FR force-directedlayout associated with G
+\item  layout: a FR force-directed layout associated with G
 }
 }
 \description{
@@ -67,7 +67,7 @@ This function re-computes the cohesion matrix each time it is run.
 To avoid unnecessary computation when creating visualizations, use the function \code{cohesion_matrix} to
 compute the cohesion matrix which may then be taken as input for \code{local_depths},
 \code{strong_threshold}, \code{cohesion_strong}, \code{community_graphs},
-and \code{plot_community_graphs}.  For further detail about each component, see the documentation for each of the above functions.
+and \code{plot_community_graphs}.  For further details regarding each component, see the documentation for each of the above functions.
 }
 \examples{
 D <- dist(exdata2)
@@ -84,5 +84,5 @@ head(pald_languages$local_depths)
 
 }
 \references{
-K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(3), 2022.
+K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
 }

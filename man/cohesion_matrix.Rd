@@ -17,7 +17,7 @@ Creates a matrix of (pairwise) cohesion values from a matrix of pairwise distanc
 }
 \details{
 Computes the matrix of (pairwise) cohesion values, C_xw, from a matrix of pairwise distances or 'dist' object. Cohesion is an interpretable probability that reflects the strength of alignment of a point, w, to another point, x.
-The rows of the cohesion matrix can be seen as providing neighborhood weights.  These values may be used for defining associated weighted graphs (for the purposes of community analysis) as in BMM22.
+The rows of the cohesion matrix can be seen as providing neighborhood weights.  These values may be used for defining associated weighted graphs (for the purpose of community analysis) as in BMM22.
 
 Given an n x n distance matrix, the sum of the entries in the resulting cohesion matrix is always equal to n/2.
 Cohesion is partitioned local depth (see \code{local_depths}) and thus the row sums of the cohesion matrix provide a measure of local depth centrality.
@@ -33,5 +33,5 @@ C[8, ]
 localdepths<-rowSums(C)
 }
 \references{
-K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(3), 2022.
+K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
 }

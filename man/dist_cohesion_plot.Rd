@@ -30,17 +30,17 @@ dist_cohesion_plot(
 A plot of cohesion against distance with threshold indicated by a horiztonal line.
 }
 \description{
-Provides a plot of cohesion against distance with the threshold indicated by a horizontal line.
+Provides a plot of cohesion against distance, with the threshold indicated by a horizontal line.
 }
 \details{
 The plot of cohesion against distance provides a visualization for the manner in which distance is transformed.
 The threshold distinguishing strong and weak ties is indicated by a horizontal line.
-When there are separated regions with different density, one observes vertical bands of color, see example below and BMM22.  For each distance pair in D,
+When there are separated regions with different density, one can often observe vertical bands of color, see example below and BMM22.  For each distance pair in D,
 the corresponding value of cohesion is computed.  If the pair is within a single cluster, the point is colored
 (with the same color provided by the pald and plot_community_graph functions).  Weak ties appear below the threshold.
 
 Note that cohesion is not symmetric, and so all n^2 points are plotted.  A gray point above the threshold corresponds to a pair in which the value of cohesion is greater than
-the threshold in only one direction.  If one only wants to observe mutual cohesion (i.e., cohesion made symmetric using the minimum),
+the threshold in only one direction.  If one only wants to observe mutual cohesion (i.e., cohesion made symmetric via the minimum),
 set "mutual=TRUE".
 }
 \examples{

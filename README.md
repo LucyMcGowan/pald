@@ -201,6 +201,7 @@ instance, the Louvain method) to the resulting community graphs.
 graphs<-community_graphs(C)
 
 library(igraph)
+#> Warning: package 'igraph' was built under R version 4.1.2
 clusters(graphs$G_strong)$membership
 #> 1 2 3 4 5 6 7 8 
 #> 1 1 1 1 2 2 2 3
@@ -256,11 +257,10 @@ dist_cohesion_plot(D, cex = .8, weak_gray=TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
-Rather than showing both pairs, (*d*(*x*, *y*), *C*\[*x*, *w*\]) and
-(*d*(*x*, *y*), *C*\[*w*, *x*\]) as distinct points in the plot, setting
-`mutual = TRUE` will only plot mutual cohesion, that is the set of
-points with x-coordinate *d*(*x*, *y*) and y-coordinate
-min {*C*\[*x*, *w*\], *C*\[*w*, *x*\]}.
+Rather than showing both pairs, (d(x, y), C(x, w)) and (d(x, y), C(w,
+x)) as distinct points in the plot, setting `mutual = TRUE` will only
+plot mutual cohesion, that is the set of points with x-coordinate d(x,
+y) and y-coordinate min{C(x, w), C(w, x)}.
 
 ``` r
 par(pty = "s")
@@ -323,7 +323,7 @@ cohesion) and can be found direcly from the cohesion matrix.
 ``` r
 G_strong_lang<-community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 147bbf8:
+#> + 8/87 vertices, named, from 1efeefa:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 #And print associated neighborhood weights

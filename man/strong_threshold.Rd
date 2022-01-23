@@ -31,5 +31,5 @@ C[4, c(2, 3, 4, 6)] #cohesion values can provide neighbor weights
 
 }
 \references{
-K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(3), 2022.
+K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
 }

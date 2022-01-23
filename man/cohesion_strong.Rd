@@ -20,7 +20,7 @@ Provides the symmetrized and thresholded matrix of cohesion values.
 \details{
 The threshold is that provided by strong_threshold (and is equal to half of the average of the diagonal of C).
 Values of the cohesion matrix which are less than the threshold are set to zero.
-The symmetrization, if desired, is computed using the entry-wise minimum of C and the transpose of C (i.e., min(C_ij, C_ji)).
+The symmetrization, if desired, is computed using the entry-wise (parallel) minimum of C and ts transpose (i.e., min(C_ij, C_ji)).
 The matrix provided by cohesion_strong (with default symmetric = TRUE) is the adjacency matrix for the graph of strong ties (the cluster graph), see \code{community_graphs} and \code{pald}.
 }
 \examples{

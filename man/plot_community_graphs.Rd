@@ -35,7 +35,7 @@ plot_community_graphs(
 
 \item{vertex.label.cex}{A numeric value for modifying the vertex label size.}
 
-\item{colors}{A vector of display colors, if none is given a default is provided.}
+\item{colors}{A vector of display colors, if none is given a default list (of length 24) is provided.}
 
 \item{vertex.color.vec}{A vector of colors names for coloring vertices.}
 
@@ -45,8 +45,8 @@ plot_community_graphs(
 Provides a plot of the community graphs, with connected components of the graph of strong ties colored by connected component.
 }
 \details{
-Plots the community graph, G, with the sub-graph of strong ties emphasized and colored by connected component.  If no layout is provided, the Fructerman-Reingold (FR) graph drawing algorithm is used.
-Note that the FR graph drawing algorithm provides a somewhat different layout each time it is run.  You can also access and save a given graph layout using \code{community_graphs(C)$layout}.
+Plots the community graph, G, with the sub-graph of strong ties emphasized and colored by connected component.  If no layout is provided, the Fruchterman-Reingold (FR) graph drawing algorithm is used.
+Note that the FR graph drawing algorithm may provide a somewhat different layout each time it is run.  You can also access and save a given graph layout using \code{community_graphs(C)$layout}.
 The example below shows how to display only a subset of vertex labels.
 
 Note that the parameter \code{emph_strong} is for visualization purposes only and does not influence the network layout.

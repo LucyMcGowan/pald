@@ -6,8 +6,8 @@ Authors@R:
            comment = c(ORCID = "0000-0001-6943-2416")),
     person("Kenneth", "Berenhaut", , "berenhks@wfu.edu", role = c("aut")))
 Description: Implementation of the Partitioned Local Depths (PaLD) 
-    approach which provides a measure of local depth and the cohesion of a point to another which, 
-    together with a universal threshold for distinguishing strong and weak ties, 
+    approach which provides a measure of local depth and the cohesion of a point to another which  
+    (together with a universal threshold for distinguishing strong and weak ties) 
     may be used to reveal local and global structure in data.  
     No extraneous inputs, distributional assumptions, iterative procedures nor optimization criteria are employed. 
     This package includes functions for computing local depths and cohesion as well 

@@ -301,7 +301,7 @@ any_isolated <- function(c) {
 #'
 #' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
 #' @param show_labels Set to `FALSE` to omit vertex labels (to display a subset
-#'   of labels, use optional parameter `vertex_lab` to modify the label list).
+#'   of labels, use optional parameter `vertex.label` to modify the label list).
 #'   Default: `TRUE`.
 #' @param only_strong Set to `TRUE` if only strong ties, G_strong, should be
 #'   displayed; the default `FALSE` will show both strong (colored by connected
@@ -352,7 +352,7 @@ plot_community_graphs <- function(c,
 
   # Hide vertex labels if show.labels=FALSE.  Otherwise, displays vertex labels.
   if (!show_labels) {
-    dots[["vertex.label"]] <- ""
+    dots[["vertex.label"]] <- NA
   } else {
     dots[["vertex.label"]] <- dots[["vertex.label"]] %||% rownames(c)
   }
@@ -369,7 +369,7 @@ plot_community_graphs <- function(c,
 
   # if no vector of color names is given, a default list (of length 24) is given
   if (is.null(colors)) {
-    dots[["colors"]] <- c(
+    colors <- c(
       "#5F4690", "#73AF48", "#1D6996", "#CC503E", "#38A6A5",
       "#EDAD08", "#994E95", "#0F8554", "#CC6677", "#E17C05",
       "#94346E",  "#666666", "#88CCEE", "#AA4499", "#117733",
@@ -445,7 +445,7 @@ community_clusters <- function(c) {
 #' @param d A matrix of pairwise distances or a [`dist`] object.
 #' @param show_plot Set to `TRUE` to display plot; the default is `TRUE`.
 #' @param show_labels Set to `FALSE` to omit vertex labels (to display a subset
-#'   of labels, use optional parameter `vertex_lab` to modify the label list).
+#'   of labels, use optional parameter `vertex.label` to modify the label list).
 #'   Default: `TRUE`.
 #' @param only_strong Set to `TRUE` if only strong ties, G_strong, should be
 #'   displayed; the default `FALSE` will show both strong (colored by connected

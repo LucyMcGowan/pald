@@ -236,8 +236,8 @@ plot_community_graphs(
   C,
   layout = ex_data,
   emph_strong = 1,
-  show.labels = FALSE,
-  edge.width.factor = 50,
+  show_labels = FALSE,
+  edge_width_factor = 50,
   vertex.size = 8
 )
 ```
@@ -264,7 +264,7 @@ plot_community_graphs(
 ```
 
 One could alternatively use the wrapper function: 
-$\texttt{pald(cognate_dist,vertex.lab = lang_lab_subset, vertex.label.cex=.65, edge.width.factor = 30,  emph_strong = 3,vertex.size = 3)}$.  It will return a list containing: the cohesion matrix, local depths, (community) clusters, the threshold for identifying strong ties, the thresholded and symmetrized cohesion matrix, the community graph whose edges are weighted by mutual cohesion, the weighted graph of strong ties, and the layout provided by the FR network drawing algorithm applied to the community graph.  
+$\texttt{pald(cognate_dist, emph_strong = 3, edge_width_factor = 30, vertex.label = lang_lab_subset, vertex.label.cex = .65, vertex.size = 3)}$.  It will return a list containing: the cohesion matrix, local depths, (community) clusters, the threshold for identifying strong ties, the thresholded and symmetrized cohesion matrix, the community graph whose edges are weighted by mutual cohesion, the weighted graph of strong ties, and the layout provided by the FR network drawing algorithm applied to the community graph.  
 
 One can determine the (strongly cohesive) neighbors using igraph's `neighbor` function.  Edge-weights are given by cohesion (or mutual cohesion) and can be found directly from the cohesion matrix. 
 

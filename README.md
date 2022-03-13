@@ -332,8 +332,8 @@ plot_community_graphs(
   C,
   layout = ex_data,
   emph_strong = 1,
-  show.labels = FALSE,
-  edge.width.factor = 50,
+  show_labels = FALSE,
+  edge_width_factor = 50,
   vertex.size = 8
 )
 ```
@@ -365,7 +365,7 @@ plot_community_graphs(
 <img src="man/figures/README-lang-1.png" width="100%" />
 
 One could alternatively use the wrapper function:
-`pald(cognate_dist,vertex.lab = lang_lab_subset, vertex.label.cex=.65, edge.width.factor = 30, emph_strong = 3,vertex.size = 3)`.
+`pald(cognate_dist, emph_strong = 3, edge_width_factor = 30, vertex.label = lang_lab_subset, vertex.label.cex = .65, vertex.size = 3)`.
 It will return a list containing: the cohesion matrix, local depths,
 (community) clusters, the threshold for identifying strong ties, the
 thresholded and symmetrized cohesion matrix, the community graph whose
@@ -380,7 +380,7 @@ cohesion) and can be found directly from the cohesion matrix.
 ``` r
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 0a899ab:
+#> + 8/87 vertices, named, from 4989412:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

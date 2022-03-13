@@ -19,8 +19,9 @@ knitr::opts_chunk$set(
 
 
 
-
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/LucyMcGowan/pald-1/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/LucyMcGowan/pald-1/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 This package provides an implementation of the Partitioned Local Depths (PaLD) approach which consists of a measure of *local depth* and the *cohesion* of a point to another which, together with a universal threshold for distinguishing strong and weak ties, may be used to reveal local and global structure in data.  No extraneous inputs, distributional assumptions, iterative procedures nor optimization criteria are employed. This package includes functions for computing local depths and cohesion matrices as well as flexible functions for plotting community networks and displays of cohesion against distance. 
@@ -60,7 +61,7 @@ The function $\texttt{dist()}$ from the `stats` package converts an input data f
 ## A Small Example
 
 For demonstration purposes, let's begin with the small example from Figure 1 in [@bmm22].  
-```{r, echo=FALSE}
+```{r fig-1, echo=FALSE}
 par(pty = "s")
 plot(exdata1, 
      pch = 16, 
@@ -79,7 +80,7 @@ text(exdata1 + .2,
 
 The wrapper function $\texttt{pald}$ computes the cohesion matrix from which local depths are determined and community networks may be formed.  In the plots of the community networks, strongly cohesive pairs are colored according to connected component.  Such connected components may be considered "(community) clusters."  Note that the Fruchterman Reingold (FR) force-directed network drawing algorithm employed here will provide somewhat different graph layouts each time it is run.  
 
-```{r}
+```{r pald}
 par(mfrow = c(1, 2), pty = "s")  
 
 D <- dist(exdata1)
@@ -111,7 +112,7 @@ Each time the function `pald` is called, the matrix of cohesion values is re-com
 ## Cohesion Matrix
 Cohesion reflects relationship strength from the perspective of relative position, see [@bmm22]. To begin PaLD analysis, we must first compute the matrix of cohesion values from the input distance matrix or `dist` object.  Note that cohesion is not symmetric.  The values, $C[x, w]$, in the cohesion matrix are interpretable probabilities which capture the strength of the alignment of $w$ to $x$.  The sum of the cohesion matrix is always equal to $n/2$ (where $n$ is the number of data points).
 
-```{r}
+```{r cohesion}
 D <- dist(exdata1)
 C <- cohesion_matrix(D)
 round(C, 4)
@@ -154,7 +155,7 @@ The connected components of the community cluster graph, `G_strong`, are referre
 Strong ties between points will not be severed; if further partitioning of the community graph is desired, one could employ other methods (for instance, the Louvain method) to the resulting community graphs.  
 
 
-```{r, message=FALSE}
+```{r cluster, message=FALSE}
 graphs <- community_graphs(C)
 
 library(igraph)
@@ -163,13 +164,13 @@ clusters(graphs$G_strong)$membership
 
 A function for plotting the community graphs, in which the edges and vertices are colored according to cluster membership, is provided.  The default layout is obtained via the Fruchterman Reingold (FR) force-directed graph drawing algorithm.  Note that the FR force-directed algorithm will provide somewhat different layouts each time it is run.  
 
-```{r}
+```{r comm}
 plot_community_graphs(C) 
 ```
 
 You can save a particular network layout using `community_graphs(C)$layout`.The function `plot_community_graphs` can take a given layout as an argument. Below, let's overlay the community graph on the original data, that is, plot the network using the layout provided by the orignal data.  
 
-```{r}
+```{r comm-2}
 par(pty = "s")
 plot(exdata1,
      xlim = c(0, 1), 
@@ -188,7 +189,7 @@ Observe that cohesion is not a direct transformation of distance.  The `dist_coh
 
 Let's re-create Figure 2 in [@bmm22].  
 
-```{r}
+```{r fig-2}
 D <- dist(exdata2)
 C <- cohesion_matrix(D)
 par(mfrow = c(1, 2))
@@ -204,9 +205,10 @@ plot_community_graphs(C,
                       vertex.size = 3)
 dist_cohesion_plot(D, cex = .8, weak_gray = TRUE)
 ```
+
 Rather than showing both pairs, (d(x, y), C(x, w)) and (d(x, y), C(w, x)) as distinct points in the plot, setting `mutual = TRUE` will only plot mutual cohesion, that is the set of points with x-coordinate d(x, y) and y-coordinate  min{C(x, w), C(w, x)}.  
 
-```{r}
+```{r mutual}
 par(pty = "s")
 D <- dist(exdata2)
 dist_cohesion_plot(D, mutual = TRUE)
@@ -216,7 +218,7 @@ dist_cohesion_plot(D, mutual = TRUE)
 
 In this example, we consider a randomly-generated data set of 15 points.  Points are selected according to the uniform distribution on the unit square.  We first compute the distance matrix and from this calculate the cohesion matrix.  We overlay the community graphs on the data set using `plot_community_graphs` and use our original data as the `layout`. 
 
-```{r, results='hide'}
+```{r rand, results = 'hide'}
 ex_data <- matrix(runif(30), ncol = 2)
 D <- dist(ex_data)
 C <- cohesion_matrix(D)
@@ -247,7 +249,7 @@ plot_community_graphs(
 Let's perform PaLD analysis on the cognate data set from [@dyen92].  For clarity of the display, we show how to only include (a random set of the) 37 vertex labels. The remaining arguments are for aesthetics of the plot.  Note that the network layout is somewhat different each time the FR network drawing algorithm is called.  
 
 
-```{r}
+```{r lang}
 C_lang <- cohesion_matrix(cognate_dist)
 lang_lab_subset <- rownames(C_lang)
 lang_lab_subset[sample(1:87, 50)] <- ''
@@ -264,9 +266,9 @@ plot_community_graphs(
 One could alternatively use the wrapper function: 
 $\texttt{pald(cognate_dist,vertex.lab = lang_lab_subset, vertex.label.cex=.65, edge.width.factor = 30,  emph_strong = 3,vertex.size = 3)}$.  It will return a list containing: the cohesion matrix, local depths, (community) clusters, the threshold for identifying strong ties, the thresholded and symmetrized cohesion matrix, the community graph whose edges are weighted by mutual cohesion, the weighted graph of strong ties, and the layout provided by the FR network drawing algorithm applied to the community graph.  
 
-One can determine the (strongly cohesive) neighbors using igraph's `neighbor` function.  Edge-weights are given by cohesion (or mutual cohesion) and can be found direcly from the cohesion matrix. 
+One can determine the (strongly cohesive) neighbors using igraph's `neighbor` function.  Edge-weights are given by cohesion (or mutual cohesion) and can be found directly from the cohesion matrix. 
 
-```{r}
+```{r strong}
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
 
@@ -279,7 +281,7 @@ C_lang["French", neighbors(G_strong_lang, "French")]
 Cohesion is particularly useful when considering data with varying local density, see discussion in [@bmm22].  Note that PaLD was able to detect the eight natural groups within the data without the use of any additional inputs (e.g., number of clusters) nor optimization criteria.  Despite providing the "correct" number of clusters (i.e., $k = 8$) both *k*-means and heirarchical clustering did not give the desired result.  
 
 
-```{r}
+```{r vary-d}
 D3 <- dist(exdata3)
 C3 <- cohesion_matrix(D3)
 par(pty = "s")
@@ -308,7 +310,7 @@ table(clusters(cluster_graph)$membership)
 
 Here are the results for the data obtained from *k*-means and hierarchical clustering when $k = 8$.  
 
-```{r}
+```{r k-mean}
 pald_colors <-
   c(
     "#5F4690",

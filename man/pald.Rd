@@ -55,8 +55,8 @@ A list consisting of:
 \itemize{
 \item \code{C}: the matrix of cohesion values
 \item  \code{local_depths}: a vector of local depths
-\item \code{clusters}: a vectors of (community) cluster labels
-\item  threshold: the threshold above which cohesion is considered
+\item \code{clusters}: a vector of (community) cluster labels
+\item  \code{threshold}: the threshold above which cohesion is considered
 particularly strong
 \item  \code{C_strong}: the thresholded matrix of cohesion values
 \item   \code{G}: the graph whose edges weights are mutual cohesion

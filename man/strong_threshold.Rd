@@ -17,10 +17,10 @@ Given a cohesion matrix, provides the value of the threshold above which
 values of cohesion are considered "particularly strong".
 }
 \details{
-The threshold considered in BMM22 which may be used for distinguishing
-between strong and weak ties.
+The threshold considered in Berenhaut, Moore, and Melvin (2022) which may be
+used for distinguishing between strong and weak ties.
 The threshold is equal to half the average of the diagonal of the cohesion
-matrix, see BMM22.
+matrix, see Berenhaut, Moore, and Melvin (2022).
 }
 \examples{
 C <- cohesion_matrix(dist(exdata1))

@@ -25,14 +25,11 @@
 #' text(exdata1 + .08, lab = 1:8)
 #'
 #' D <- dist(exdata1)
-#'
 #' C <- cohesion_matrix(D)
-#'
 #' C
 #'
 #' ## neighbor weights (provided by cohesion) for the 8th point in exdata1
 #' C[8, ]
-#'
 #' localdepths <- rowSums(C)
 #'
 #' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective
@@ -119,10 +116,10 @@ local_depths <- function(d, is_cohesion = FALSE) {
 #' Given a cohesion matrix, provides the value of the threshold above which
 #' values of cohesion are considered "particularly strong".
 #'
-#' The threshold considered in BMM22 which may be used for distinguishing
-#' between strong and weak ties.
+#' The threshold considered in Berenhaut, Moore, and Melvin (2022) which may be
+#' used for distinguishing between strong and weak ties.
 #' The threshold is equal to half the average of the diagonal of the cohesion
-#' matrix, see BMM22.
+#' matrix, see Berenhaut, Moore, and Melvin (2022).
 #'
 #' @param c A matrix of cohesion values (see `cohesion_matrix`).
 #' @return The value of the threshold.
@@ -229,13 +226,13 @@ cohesion_strong <- function(c, symmetric = TRUE) {
 #' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
 #' @return A list consisting of:
 #'  \itemize{
-#'        \item G: the weighted (community) graph whose edge weights are mutual
+#'        \item `G`: the weighted (community) graph whose edge weights are mutual
 #'        cohesion
-#'        \item G_strong: the weighted (community) graph consisting of edges
+#'        \item `G_strong`: the weighted (community) graph consisting of edges
 #'        for which mutual cohesion is greater than the threshold for strong
-#'        ties (see strong_threshold)
-#'        \item layout: the layout, using the Fruchterman Reingold (FR)
-#'        force-directed graph drawing for the graph G
+#'        ties (see [`strong_threshold`])
+#'        \item `layout`: the layout, using the Fruchterman Reingold (FR)
+#'        force-directed graph drawing for the graph `G`
 #' }
 #' @examples
 #' C <- cohesion_matrix(dist(exdata2))
@@ -257,20 +254,33 @@ community_graphs <- function(c) {
 
   # Points, x, for which mutual cohesion with all others are zero are omitted
   # from the graph
-  # This prints an alert that such points are not included in G
-  cdiagz <- c_symmetric
-  diag(cdiagz) <- 0
-  isolated <- rownames(c)[apply(cdiagz == 0, 1, all)]
-  if (length(isolated) > 0) {
-    message_glue(
-      "These points have no (strong nor weak) ties: \n * {isolated}"
-      )
-  }
+  # This prints an alert that such points are not included in G TODO: is this true?
+  any_isolated(c)
   return(list(G = g, G_strong = g_strong, layout = lay))
 }
 
 
-
+#' Any isolated
+#'
+#' Checks for isolated points.
+#'
+#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#'
+#' @return Logical, indicating whether any points are isolated.
+#'
+any_isolated <- function(c) {
+  c_symmetric <- pmin(c, t(c))
+  cdiagz <- c_symmetric
+  diag(cdiagz) <- 0
+  isolated <- rownames(c)[apply(cdiagz == 0, 1, all)]
+  is_isolated <- length(isolated) > 0
+  if (is_isolated) {
+    message_glue(
+      "These points have no (strong nor weak) ties: \n * {isolated}"
+    )
+  }
+  return(invisible(is_isolated))
+}
 
 
 #' Plot Community Graphs
@@ -396,7 +406,27 @@ plot_community_graphs <- function(c,
   do.call(igraph::plot.igraph, dots)
 }
 
-
+#' Community clusters
+#'
+#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#'
+#' @return A data frame with two columns:
+#'  * `point`: The points from cohesion matrix `c`
+#'  * `cluster`: The (community) cluster labels
+#'
+#' @examples
+#' D <- dist(exdata2)
+#' C <- cohesion_matrix(D)
+#' community_clusters(C)
+#' @export
+community_clusters <- function(c) {
+  c_graphs <- community_graphs(c)
+  cl <- igraph::clusters(c_graphs$G_strong)$membership
+  data.frame(
+    point = names(cl),
+    cluster = cl
+  )
+}
 #' Partitioned Local Depths (PaLD)
 #'
 #' A wrapper function which computes the cohesion matrix, local depths,
@@ -440,8 +470,8 @@ plot_community_graphs <- function(c,
 #' \itemize{
 #'    \item `C`: the matrix of cohesion values
 #'    \item  `local_depths`: a vector of local depths
-#'    \item `clusters`: a vectors of (community) cluster labels
-#'    \item  threshold: the threshold above which cohesion is considered
+#'    \item `clusters`: a vector of (community) cluster labels
+#'    \item  `threshold`: the threshold above which cohesion is considered
 #'       particularly strong
 #'    \item  `C_strong`: the thresholded matrix of cohesion values
 #'    \item   `G`: the graph whose edges weights are mutual cohesion
@@ -549,11 +579,11 @@ pald <- function(d,
 #' dist_cohesion_plot(D, mutual = TRUE, weak_gray = TRUE)
 #' @export
 dist_cohesion_plot <- function(d,
-                             mutual = FALSE,
-                             xlim_max = NULL,
-                             cex = 1,
-                             colors = NULL,
-                             weak_gray = FALSE) {
+                               mutual = FALSE,
+                               xlim_max = NULL,
+                               cex = 1,
+                               colors = NULL,
+                               weak_gray = FALSE) {
   graphics::par(xpd = FALSE)
 
   if (is.null(xlim_max)) {
@@ -566,48 +596,48 @@ dist_cohesion_plot <- function(d,
     stop_glue("`d` is not a square matrix.\n",
               "Please provide a distance matrix or 'dist' object")
   }
-    c <- cohesion_matrix(d)
+  c <- cohesion_matrix(d)
 
-    if (mutual) {
-      c <- pmin(c, t(c))
-    }
-    if (is.null(colors)) {
-      colors <- c(
-        "#5F4690", "#73AF48", "#1D6996", "#CC503E", "#38A6A5", "#EDAD08",
-        "#994E95", "#0F8554", "#CC6677", "#E17C05", "#94346E",  "#666666",
-        "#88CCEE", "#AA4499", "#117733", "#332288", "#44AA99", "#6F4070",
-        "#999933",  "#DDCC77", "#882255", "#661100", "#6699CC", "#888888")
-    }
-    n <- dim(c)[[1]]
+  if (mutual) {
+    c <- pmin(c, t(c))
+  }
+  if (is.null(colors)) {
+    colors <- c(
+      "#5F4690", "#73AF48", "#1D6996", "#CC503E", "#38A6A5", "#EDAD08",
+      "#994E95", "#0F8554", "#CC6677", "#E17C05", "#94346E",  "#666666",
+      "#88CCEE", "#AA4499", "#117733", "#332288", "#44AA99", "#6F4070",
+      "#999933",  "#DDCC77", "#882255", "#661100", "#6699CC", "#888888")
+  }
+  n <- dim(c)[[1]]
 
-    c_graphs <- community_graphs(c)
+  c_graphs <- community_graphs(c)
 
-    pald_clusters <- igraph::clusters(c_graphs$G_strong)$membership
+  pald_clusters <- igraph::clusters(c_graphs$G_strong)$membership
 
-    c_colors <- matrix(colors[pald_clusters], n, n)
+  c_colors <- matrix(colors[pald_clusters], n, n)
 
-    c_colors[matrix(pald_clusters, n, n) !=
-               t(matrix(pald_clusters, n, n))] <- "gray"
+  c_colors[matrix(pald_clusters, n, n) !=
+             t(matrix(pald_clusters, n, n))] <- "gray"
 
-    if (weak_gray) {
-      c_colors[c < strong_threshold(c)] <- "gray"
-    }
-    diag(c_colors) <- "black"
-    c_pch <- matrix(16, n, n)
-    c_pch[c < strong_threshold(c)] <- 1
-    if (mutual) {
-      ylab <- "mutual cohesion"
-    } else {
-      ylab <- "cohesion"
-    }
-    graphics::plot(d,
-         c,
-         col = c_colors,
-         pch = c_pch,
-         ylab = ylab,
-         xlab = "distance",
-         xlim = c(0, xlim_max),
-         cex = cex)
-    graphics::abline(h = strong_threshold(c))
+  if (weak_gray) {
+    c_colors[c < strong_threshold(c)] <- "gray"
+  }
+  diag(c_colors) <- "black"
+  c_pch <- matrix(16, n, n)
+  c_pch[c < strong_threshold(c)] <- 1
+  if (mutual) {
+    ylab <- "mutual cohesion"
+  } else {
+    ylab <- "cohesion"
+  }
+  graphics::plot(d,
+                 c,
+                 col = c_colors,
+                 pch = c_pch,
+                 ylab = ylab,
+                 xlab = "distance",
+                 xlim = c(0, xlim_max),
+                 cex = cex)
+  graphics::abline(h = strong_threshold(c))
 
 }

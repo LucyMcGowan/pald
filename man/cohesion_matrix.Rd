@@ -35,14 +35,11 @@ plot(exdata1)
 text(exdata1 + .08, lab = 1:8)
 
 D <- dist(exdata1)
-
 C <- cohesion_matrix(D)
-
 C
 
 ## neighbor weights (provided by cohesion) for the 8th point in exdata1
 C[8, ]
-
 localdepths <- rowSums(C)
 
 }

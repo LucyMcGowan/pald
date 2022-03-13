@@ -12,13 +12,13 @@ community_graphs(c)
 \value{
 A list consisting of:
 \itemize{
-\item G: the weighted (community) graph whose edge weights are mutual
+\item \code{G}: the weighted (community) graph whose edge weights are mutual
 cohesion
-\item G_strong: the weighted (community) graph consisting of edges
+\item \code{G_strong}: the weighted (community) graph consisting of edges
 for which mutual cohesion is greater than the threshold for strong
-ties (see strong_threshold)
-\item layout: the layout, using the Fruchterman Reingold (FR)
-force-directed graph drawing for the graph G
+ties (see \code{\link{strong_threshold}})
+\item \code{layout}: the layout, using the Fruchterman Reingold (FR)
+force-directed graph drawing for the graph \code{G}
 }
 }
 \description{

@@ -2,6 +2,7 @@
 
 export(cohesion_matrix)
 export(cohesion_strong)
+export(community_clusters)
 export(community_graphs)
 export(dist_cohesion_plot)
 export(local_depths)

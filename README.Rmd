@@ -43,7 +43,7 @@ devtools::install_github("moorekatherine/pald")
 *Note this is temporarily at:*
 ``` r
 # install.packages("devtools")
-devtools::install_github("LucyMcGowan/pald-1")
+devtools::install_github("LucyMcGowan/pald")
 ```
 
 ```{r example, results='hide'}

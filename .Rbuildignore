@@ -5,3 +5,6 @@
 ^README\.Rmd$
 ^\.github$
 ^pald\_package\.bib$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

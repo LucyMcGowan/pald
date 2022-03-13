@@ -40,7 +40,7 @@ devtools::install_github("moorekatherine/pald")
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("LucyMcGowan/pald-1")
+devtools::install_github("LucyMcGowan/pald")
 ```
 
 ``` r
@@ -387,7 +387,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 0421dd1:
+#> + 8/87 vertices, named, from 8fd7edb:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

@@ -158,8 +158,7 @@ Strong ties between points will not be severed; if further partitioning of the c
 ```{r cluster, message=FALSE}
 graphs <- community_graphs(C)
 
-library(igraph)
-clusters(graphs$G_strong)$membership
+community_clusters(C)
 ```
 
 A function for plotting the community graphs, in which the edges and vertices are colored according to cluster membership, is provided.  The default layout is obtained via the Fruchterman Reingold (FR) force-directed graph drawing algorithm.  Note that the FR force-directed algorithm will provide somewhat different layouts each time it is run.  
@@ -268,7 +267,8 @@ $\texttt{pald(cognate_dist, emph_strong = 3, edge_width_factor = 30, vertex.labe
 
 One can determine the (strongly cohesive) neighbors using igraph's `neighbor` function.  Edge-weights are given by cohesion (or mutual cohesion) and can be found directly from the cohesion matrix. 
 
-```{r strong}
+```{r strong, message = FALSE, warning = FALSE}
+library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
 

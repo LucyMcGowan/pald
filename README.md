@@ -225,10 +225,16 @@ instance, the Louvain method) to the resulting community graphs.
 ``` r
 graphs <- community_graphs(C)
 
-library(igraph)
-clusters(graphs$G_strong)$membership
-#> 1 2 3 4 5 6 7 8 
-#> 1 1 1 1 2 2 2 3
+community_clusters(C)
+#>   point cluster
+#> 1     1       1
+#> 2     2       1
+#> 3     3       1
+#> 4     4       1
+#> 5     5       2
+#> 6     6       2
+#> 7     7       2
+#> 8     8       3
 ```
 
 A function for plotting the community graphs, in which the edges and
@@ -378,9 +384,10 @@ One can determine the (strongly cohesive) neighbors using igraph’s
 cohesion) and can be found directly from the cohesion matrix.
 
 ``` r
+library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 4989412:
+#> + 8/87 vertices, named, from 5503241:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

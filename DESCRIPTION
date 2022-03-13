@@ -1,6 +1,6 @@
 Package: pald
 Title: Partitioned Local Depths for Community Structure in Data
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     c(person("Katherine", "Moore", email = "kmoore@amherst.edu", role = c("aut"),
            comment = c(ORCID = "0000-0001-6943-2416")),

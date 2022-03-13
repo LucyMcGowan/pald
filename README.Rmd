@@ -37,12 +37,6 @@ You can install the development version of pald from [GitHub](https://github.com
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("moorekatherine/pald")
-```
-
-*Note this is temporarily at:*
-``` r
-# install.packages("devtools")
 devtools::install_github("LucyMcGowan/pald")
 ```
 

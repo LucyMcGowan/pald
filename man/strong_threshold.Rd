@@ -4,32 +4,41 @@
 \alias{strong_threshold}
 \title{Cohesion Threshold for Strong Ties}
 \usage{
-strong_threshold(C)
+strong_threshold(c)
 }
 \arguments{
-\item{C}{A matrix of cohesion values (see \code{cohesion_matrix}).}
+\item{c}{A matrix of cohesion values (see \code{cohesion_matrix}).}
 }
 \value{
 The value of the threshold.
 }
 \description{
-Given a cohesion matrix, provides the value of the threshold above which values of cohesion are considered "particularly strong".
+Given a cohesion matrix, provides the value of the threshold above which
+values of cohesion are considered "particularly strong".
 }
 \details{
-The threshold considered in BMM22 which may be used for distinguishing between strong and weak ties.
-The threshold is equal to half the average of the diagonal of the cohesion matrix, see BMM22.
+The threshold considered in BMM22 which may be used for distinguishing
+between strong and weak ties.
+The threshold is equal to half the average of the diagonal of the cohesion
+matrix, see BMM22.
 }
 \examples{
 C <- cohesion_matrix(dist(exdata1))
 strong_threshold(C)
-mean(diag(C))/2
-#points whose cohesion are greater than the threshold may be considered (strong) neighbors
+mean(diag(C)) / 2
+
+## points whose cohesion are greater than the threshold may be considered
+## (strong) neighbors
 which(C[3, ] > strong_threshold(C))
-#note that the number of (strongly-cohesive) neighbors varies across the space
+
+## note that the number of (strongly-cohesive) neighbors varies across the
+## space
 which(C[4, ] > strong_threshold(C))
-C[4, c(2, 3, 4, 6)] #cohesion values can provide neighbor weights
+C[4, c(2, 3, 4, 6)] # cohesion values can provide neighbor weights
 
 }
 \references{
-K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
+K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective
+on perceived distances reveals deep community structure. Proc. Natl. Acad.
+Sci., 119(4), 2022.
 }

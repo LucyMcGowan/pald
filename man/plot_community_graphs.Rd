@@ -5,59 +5,71 @@
 \title{Plot Community Graphs}
 \usage{
 plot_community_graphs(
-  C,
-  layout = NULL,
-  show.labels = TRUE,
+  c,
+  show_labels = TRUE,
   only_strong = FALSE,
   emph_strong = 2,
-  edge.width.factor = 50,
-  vertex.lab = rownames(C),
-  vertex.label.cex = 1,
+  edge_width_factor = 50,
   colors = NULL,
-  vertex.color.vec = NULL,
-  vertex.size = 1
+  ...
 )
 }
 \arguments{
-\item{C}{A matrix of cohesion values (see \code{cohesion_matrix}).}
+\item{c}{A matrix of cohesion values (see \code{\link{cohesion_matrix}}).}
 
-\item{layout}{A layout for the graph.  If none is specified, FR-graph drawing algorithm is used.}
+\item{show_labels}{Set to \code{FALSE} to omit vertex labels (to display a subset
+of labels, use optional parameter \code{vertex_lab} to modify the label list).
+Default: \code{TRUE}.}
 
-\item{show.labels}{Set to FALSE to omit vertex labels (to display a subset of labels, use optional input "vertex.lab" and modify the label list).}
+\item{only_strong}{Set to \code{TRUE} if only strong ties, G_strong, should be
+displayed; the default \code{FALSE} will show both strong (colored by connected
+component) and weak ties (in gray).}
 
-\item{only_strong}{Set to TRUE if only strong ties, G_strong, should be displayed; the default FALSE will show both strong (colored by connected component) and weak ties (in gray).}
+\item{emph_strong}{Numeric. The numeric factor by which the edge widths of
+strong ties are emphasized in the display; the default is \code{2}.}
 
-\item{emph_strong}{The numeric factor by which the edge widths of strong ties are emphasized in the display; the default is 2.}
+\item{edge_width_factor}{Numeric. Modify to change displayed edge widths.
+Default: \code{50}.}
 
-\item{edge.width.factor}{Modify to change displayed edge widths.}
+\item{colors}{A vector of display colors, if none is given a default list
+(of length 24) is provided.}
 
-\item{vertex.lab}{A vector containing label names.}
-
-\item{vertex.label.cex}{A numeric value for modifying the vertex label size.}
-
-\item{colors}{A vector of display colors, if none is given a default list (of length 24) is provided.}
-
-\item{vertex.color.vec}{A vector of colors names for coloring vertices.}
-
-\item{vertex.size}{A numeric value for vertex size.}
+\item{...}{Optional parameters to pass to the \code{\link[igraph:plot.igraph]{igraph::plot.igraph}}.
+function. Some commonly passed arguments include:
+\itemize{
+\item \code{layout}  A layout for the graph.  If none is specified, FR-graph
+drawing algorithm is used.
+\item \code{vertex.label} A vector containing label names. If none is given,
+the rownames of \code{c} are used
+\item \code{vertex.size} A numeric value for vertex size (default = \code{1})
+\item \code{vertex.color.vec} A vector of color names for coloring the vertices
+\item \code{vertex.label.cex} A numeric value for modifying the vertex label size.
+(default = \code{1})
+}}
 }
 \description{
-Provides a plot of the community graphs, with connected components of the graph of strong ties colored by connected component.
+Provides a plot of the community graphs, with connected components of the
+graph of strong ties colored by connected component.
 }
 \details{
-Plots the community graph, G, with the sub-graph of strong ties emphasized and colored by connected component.  If no layout is provided, the Fruchterman-Reingold (FR) graph drawing algorithm is used.
-Note that the FR graph drawing algorithm may provide a somewhat different layout each time it is run.  You can also access and save a given graph layout using \code{community_graphs(C)$layout}.
+Plots the community graph, G, with the sub-graph of strong ties emphasized
+and colored by connected component.  If no layout is provided, the
+Fruchterman-Reingold (FR) graph drawing algorithm is used.
+Note that the FR graph drawing algorithm may provide a somewhat different
+layout each time it is run.  You can also access and save a given graph
+layout using \code{community_graphs(C)$layout}.
 The example below shows how to display only a subset of vertex labels.
 
-Note that the parameter \code{emph_strong} is for visualization purposes only and does not influence the network layout.
+Note that the parameter \code{emph_strong} is for visualization purposes
+only and does not influence the network layout.
 }
 \examples{
 C <- cohesion_matrix(dist(exdata1))
 plot_community_graphs(C, emph_strong = 1, layout = exdata1)
 plot_community_graphs(C, only_strong = TRUE)
 
-C2<-cohesion_matrix(cognate_dist)
-subset_lang_names<-rownames(C2)
-subset_lang_names[sample(1:87, 60)]<-''
-plot_community_graphs(C2, vertex.lab = subset_lang_names, vertex.size = 3)
+C2 <- cohesion_matrix(cognate_dist)
+subset_lang_names <- rownames(C2)
+subset_lang_names[sample(1:87, 60)] <- ""
+plot_community_graphs(C2, vertex.label = subset_lang_names, vertex.size = 3)
 }

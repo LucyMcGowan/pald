@@ -5,84 +5,96 @@
 \title{Partitioned Local Depths (PaLD)}
 \usage{
 pald(
-  D,
-  show.plot = TRUE,
-  layout = NULL,
-  show.labels = TRUE,
+  d,
+  show_plot = TRUE,
+  show_labels = TRUE,
   only_strong = FALSE,
   emph_strong = 2,
-  edge.width.factor = 50,
-  vertex.lab = rownames(C),
+  edge_width_factor = 50,
   colors = NULL,
-  vertex.color.vec = NULL,
-  vertex.label.cex = 1,
-  vertex.size = 1
+  ...
 )
 }
 \arguments{
-\item{D}{A dist object or matrix of pairwise distances.}
+\item{d}{A \code{dist} object or matrix of pairwise distances.}
 
-\item{show.plot}{Set to TRUE to display plot; the default is TRUE.}
+\item{show_plot}{Set to \code{TRUE} to display plot; the default is \code{TRUE}.}
 
-\item{layout}{A layout for the graph.  If none is specified, FR-graph drawing algorithm is used.}
+\item{show_labels}{Set to \code{FALSE} to omit vertex labels (to display a subset
+of labels, use optional parameter \code{vertex_lab} to modify the label list).
+Default: \code{TRUE}.}
 
-\item{show.labels}{Set to FALSE to omit vertex labels (to display a subset of labels, use optional input "vertex.lab" and modify the label list).}
+\item{only_strong}{Set to \code{TRUE} if only strong ties, G_strong, should be
+displayed; the default \code{FALSE} will show both strong (colored by connected
+component) and weak ties (in gray).}
 
-\item{only_strong}{Set to TRUE if only strong ties, G_strong, should be displayed; the default FALSE will show both strong (colored by connected component) and weak ties (in gray).}
+\item{emph_strong}{Numeric. The numeric factor by which the edge widths of
+strong ties are emphasized in the display; the default is \code{2}.}
 
-\item{emph_strong}{The numeric factor by which the edge widths of strong ties are emphasized in the display; the default is 2.}
+\item{edge_width_factor}{Numeric. Modify to change displayed edge widths.
+Default: \code{50}.}
 
-\item{edge.width.factor}{Modify to change displayed edge widths.}
+\item{colors}{A vector of display colors, if none is given a default list
+(of length 24) is provided.}
 
-\item{vertex.lab}{A vector containing label names.}
-
-\item{colors}{A vector of display colors, if none is given a default is provided.}
-
-\item{vertex.color.vec}{A vector of colors names for coloring vertices.}
-
-\item{vertex.label.cex}{A numeric value for modifying the vertex label size.}
-
-\item{vertex.size}{A numeric value for vertex size.}
+\item{...}{Optional parameters to pass to the \code{\link[igraph:plot.igraph]{igraph::plot.igraph}}.
+function. Some commonly passed arguments include:
+\itemize{
+\item \code{layout}  A layout for the graph.  If none is specified, FR-graph
+drawing algorithm is used.
+\item \code{vertex.label} A vector containing label names. If none is given,
+the rownames of \code{c} are used
+\item \code{vertex.size} A numeric value for vertex size (default = \code{1})
+\item \code{vertex.color.vec} A vector of color names for coloring the vertices
+\item \code{vertex.label.cex} A numeric value for modifying the vertex label size.
+(default = \code{1})
+}}
 }
 \value{
 A list consisting of:
 \itemize{
-\item C: the matrix of cohesion values
-\item  local_depths: a vector of local depths
-\item clusters: a vectors of (community) cluster labels
+\item \code{C}: the matrix of cohesion values
+\item  \code{local_depths}: a vector of local depths
+\item \code{clusters}: a vectors of (community) cluster labels
 \item  threshold: the threshold above which cohesion is considered
 particularly strong
-\item  C_strong: the thresholded matrix of cohesion values
-\item   G: the graph whose edges weights are mutual cohesion
-\item  G_strong: the weighted graph whose edges are those for
+\item  \code{C_strong}: the thresholded matrix of cohesion values
+\item   \code{G}: the graph whose edges weights are mutual cohesion
+\item  \code{G_strong}: the weighted graph whose edges are those for
 which cohesion is particularly strong
-\item  layout: a FR force-directed layout associated with G
+\item  \code{layout}: a FR force-directed layout associated with G
 }
 }
 \description{
-A wrapper function which computes the cohesion matrix, local depths, community graphs and provides a plot of the community graphs with connected components of the graph of strong ties colored by connected component.
+A wrapper function which computes the cohesion matrix, local depths,
+community graphs and provides a plot of the community graphs with connected
+components of the graph of strong ties colored by connected component.
 }
 \details{
 This function re-computes the cohesion matrix each time it is run.
-To avoid unnecessary computation when creating visualizations, use the function \code{cohesion_matrix} to
-compute the cohesion matrix which may then be taken as input for \code{local_depths},
-\code{strong_threshold}, \code{cohesion_strong}, \code{community_graphs},
-and \code{plot_community_graphs}.  For further details regarding each component, see the documentation for each of the above functions.
+To avoid unnecessary computation when creating visualizations, use the
+function \code{\link{cohesion_matrix}} to compute the cohesion matrix which may then
+be taken as input for \code{\link{local_depths}}, \code{\link{strong_threshold}},
+\code{\link{cohesion_strong}}, \code{\link{community_graphs}}, and \code{\link{plot_community_graphs}}.
+For further details regarding each component, see the documentation for
+each of the above functions.
 }
 \examples{
 D <- dist(exdata2)
-pald_results<-pald(D)
+pald_results <- pald(D)
 pald_results$local_depths
-pald(D, layout=exdata2, show.labels = FALSE)
+pald(D, layout = exdata2, show_labels = FALSE)
 
-C<-cohesion_matrix(D)
+C <- cohesion_matrix(D)
 local_depths(C)
-plot_community_graphs(C, layout = exdata2, show.labels = FALSE)
+plot_community_graphs(C, layout = exdata2, show_labels = FALSE)
 
-pald_languages<-pald(cognate_dist)
+pald_languages <- pald(cognate_dist)
 head(pald_languages$local_depths)
 
 }
 \references{
-K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
+K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective
+on perceived distances reveals deep community structure. Proc. Natl. Acad.
+Sci., 119(4), 2022.
 }

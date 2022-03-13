@@ -4,29 +4,40 @@
 \alias{community_graphs}
 \title{Community Graphs}
 \usage{
-community_graphs(C)
+community_graphs(c)
 }
 \arguments{
-\item{C}{A matrix of cohesion values (see \code{cohesion_matrix}).}
+\item{c}{A matrix of cohesion values (see \code{\link{cohesion_matrix}}).}
 }
 \value{
 A list consisting of:
 \itemize{
-\item G: the weighted (community) graph whose edge weights are mutual cohesion
-\item  G_strong: the weighted (community) graph consisting of edges for which mutual cohesion is greater than the threshold for strong ties (see strong_threshold)
-\item  layout: the layout, using the Fruchterman Reingold (FR) force-directed graph drawing for the graph G
+\item G: the weighted (community) graph whose edge weights are mutual
+cohesion
+\item G_strong: the weighted (community) graph consisting of edges
+for which mutual cohesion is greater than the threshold for strong
+ties (see strong_threshold)
+\item layout: the layout, using the Fruchterman Reingold (FR)
+force-directed graph drawing for the graph G
 }
 }
 \description{
-Provides the graphs whose edge weights are (mutual) cohesion, together with a graph layout.
+Provides the graphs whose edge weights are (mutual) cohesion, together with
+a graph layout.
 }
 \details{
-Constructs the graphs whose edge weights are (mutual) cohesion (see \code{cohesion_matrix}), self-loops are removed.
-The graph G has adjacency matrix equal to the symmetrized cohesion matrix (using the entry-wise parallel minimum of C and its transpose).
-The graph G_strong has adjacency matrix equal to the thresholded and symmetrized cohesion matrix (see \code{cohesion_strong}).  The threshold is equal to half of the average of the diagonal of the
-cohesion matrix (see \code{strong_threshold}).
+Constructs the graphs whose edge weights are (mutual) cohesion
+(see \code{\link{cohesion_matrix}}), self-loops are removed.
+The graph G has adjacency matrix equal to the symmetrized cohesion matrix
+(using the entry-wise parallel minimum of C and its transpose).
+The graph G_strong has adjacency matrix equal to the thresholded and
+symmetrized cohesion matrix (see \code{\link{cohesion_strong}}).  The threshold is
+equal to half of the average of the diagonal of the
+cohesion matrix (see \code{\link{strong_threshold}}).
 
-A layout is also computed using the Fruchterman-Reingold (FR) force-directed graph drawing algorithm.  As a result, it may provide a somewhat different layout each time it is run.
+A layout is also computed using the Fruchterman-Reingold (FR)
+force-directed graph drawing algorithm.  As a result, it may provide a
+somewhat different layout each time it is run.
 }
 \examples{
 C <- cohesion_matrix(dist(exdata2))

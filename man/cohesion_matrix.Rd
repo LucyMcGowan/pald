@@ -4,34 +4,50 @@
 \alias{cohesion_matrix}
 \title{Cohesion Matrix}
 \usage{
-cohesion_matrix(D)
+cohesion_matrix(d)
 }
 \arguments{
-\item{D}{A distance matrix or `dist' object.}
+\item{d}{A distance matrix or \code{dist} object.}
 }
 \value{
 The matrix, C, of cohesion values.
 }
 \description{
-Creates a matrix of (pairwise) cohesion values from a matrix of pairwise distances or a 'dist' object.
+Creates a matrix of (pairwise) cohesion values from a matrix of pairwise
+distances or a 'dist' object.
 }
 \details{
-Computes the matrix of (pairwise) cohesion values, C_xw, from a matrix of pairwise distances or 'dist' object. Cohesion is an interpretable probability that reflects the strength of alignment of a point, w, to another point, x.
-The rows of the cohesion matrix can be seen as providing neighborhood weights.  These values may be used for defining associated weighted graphs (for the purpose of community analysis) as in BMM22.
+Computes the matrix of (pairwise) cohesion values, C_xw, from a matrix of
+pairwise distances or 'dist' object. Cohesion is an interpretable probability
+that reflects the strength of alignment of a point, w, to another point, x.
+The rows of the cohesion matrix can be seen as providing neighborhood
+weights.  These values may be used for defining associated weighted graphs
+(for the purpose of community analysis) as in BMM22.
 
-Given an n x n distance matrix, the sum of the entries in the resulting cohesion matrix is always equal to n/2.
-Cohesion is partitioned local depth (see \code{local_depths}) and thus the row sums of the cohesion matrix provide a measure of local depth centrality.
+Given an n x n distance matrix, the sum of the entries in the resulting
+cohesion matrix is always equal to n/2.
+Cohesion is partitioned local depth (see \code{\link{local_depths}}) and thus the row
+sums of the cohesion matrix provide a measure of local depth centrality.
 }
 \examples{
+
 plot(exdata1)
 text(exdata1 + .08, lab = 1:8)
+
 D <- dist(exdata1)
-C<-cohesion_matrix(D)
+
+C <- cohesion_matrix(D)
+
 C
-#neighbor weights (provided by cohesion) for the 8th point in exdata1
+
+## neighbor weights (provided by cohesion) for the 8th point in exdata1
 C[8, ]
-localdepths<-rowSums(C)
+
+localdepths <- rowSums(C)
+
 }
 \references{
-K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective on perceived distances reveals deep community structure. Proc. Natl. Acad. Sci., 119(4), 2022.
+K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective
+on perceived distances reveals deep community structure. Proc. Natl.
+Acad. Sci., 119(4), 2022.
 }

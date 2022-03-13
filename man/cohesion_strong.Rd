@@ -4,36 +4,54 @@
 \alias{cohesion_strong}
 \title{Cohesion Matrix: Strong Ties}
 \usage{
-cohesion_strong(C, symmetric = TRUE)
+cohesion_strong(c, symmetric = TRUE)
 }
 \arguments{
-\item{C}{A matrix of cohesion values (see \code{cohesion_matrix}).}
+\item{c}{A matrix of cohesion values (see \code{cohesion_matrix}).}
 
-\item{symmetric}{Whether the returned matrix should be made symmetric (using the minimum); the default is TRUE.}
+\item{symmetric}{Logical. Whether the returned matrix should be made
+symmetric (using the minimum); the default is \code{TRUE}.}
 }
 \value{
-The symmetrized cohesion matrix in which all entries corresponding to weak ties are set to zero.
+The symmetrized cohesion matrix in which all entries corresponding
+to weak ties are set to zero.
 }
 \description{
 Provides the symmetrized and thresholded matrix of cohesion values.
 }
 \details{
-The threshold is that provided by strong_threshold (and is equal to half of the average of the diagonal of C).
-Values of the cohesion matrix which are less than the threshold are set to zero.
-The symmetrization, if desired, is computed using the entry-wise (parallel) minimum of C and ts transpose (i.e., min(C_ij, C_ji)).
-The matrix provided by cohesion_strong (with default symmetric = TRUE) is the adjacency matrix for the graph of strong ties (the cluster graph), see \code{community_graphs} and \code{pald}.
+The threshold is that provided by strong_threshold (and is equal to half of
+the average of the diagonal of \code{c}).
+Values of the cohesion matrix which are less than the threshold are set to
+zero.
+The symmetrization, if desired, is computed using the entry-wise (parallel)
+minimum of C and ts transpose (i.e., \code{min(C_ij, C_ji)}).
+The matrix provided by cohesion_strong (with default \code{symmetric = TRUE}) is
+the adjacency matrix for the graph of strong ties (the cluster graph), see
+\code{\link{community_graphs}} and \code{\link{pald}}.
 }
 \examples{
 C <- cohesion_matrix(dist(exdata2))
 strong_threshold(C)
 cohesion_strong(C)
-#To illustrate the calculation performed
-C_strong<-C
-C_strong[C < strong_threshold(C)]<-0 #C_strong is equal to cohesion_strong(C, symmetric = FALSE)
-C_strong_sym<-pmin(C_strong, t(C_strong)) #C_strong_sym is equal to cohesion_strong(C)
-#The (cluster) graph whose adjacency matrix, CS, is the matrix of strong ties
-CS<-cohesion_strong(C)
-library(igraph)
-G_strong <- simplify(graph.adjacency(CS, weighted = TRUE, mode = "undirected"))
+
+## To illustrate the calculation performed
+C_strong <- C
+
+## C_strong is equal to cohesion_strong(C, symmetric = FALSE)
+C_strong[C < strong_threshold(C)] <- 0
+
+## C_strong_sym is equal to cohesion_strong(C)
+C_strong_sym <- pmin(C_strong, t(C_strong))
+
+## The (cluster) graph whose adjacency matrix, CS,
+## is the matrix of strong ties
+CS <- cohesion_strong(C)
+
+if (requireNamespace("igraph", quietly = TRUE)) {
+G_strong <- igraph::simplify(
+  igraph::graph.adjacency(CS, weighted = TRUE, mode = "undirected")
+  )
 plot(G_strong)
+}
 }

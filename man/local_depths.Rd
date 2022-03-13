@@ -4,31 +4,44 @@
 \alias{local_depths}
 \title{Local (Community) Depths}
 \usage{
-local_depths(D, is.cohesion = FALSE)
+local_depths(d, is_cohesion = FALSE)
 }
 \arguments{
-\item{D}{A matrix of pairwise distances or 'dist' object.}
+\item{d}{A matrix of pairwise distances or \code{dist} object.}
 
-\item{is.cohesion}{Set to TRUE when D is a pre-computed cohesion matrix; the default is FALSE.}
+\item{is_cohesion}{Logical. Set to TRUE when \code{d} is a pre-computed cohesion
+matrix; the default is \code{FALSE}.}
 }
 \value{
 A vector of local depths.
 }
 \description{
-Creates a vector of local depths from a matrix of distances (or 'dist' object).
+Creates a vector of local depths from a matrix of distances (or \code{dist}
+object).
 }
 \details{
-Local depth is an interpretable probability which reflects aspects of relative position and centrality via distance comparisons (i.e., d(z, x) < d(z, y)).
-The average of the local depth values is always 1/2.  Cohesion is partitioned local depth (see \code{cohesion_matrix}); the row-sums of the cohesion matrix are the values of local depth.
-One can optionally provide a pre-computed cohesion matrix using the optional input 'is.cohesion = TRUE'.
+Local depth is an interpretable probability which reflects aspects of
+relative position and centrality via distance comparisons
+(i.e., d(z, x) < d(z, y)).
+
+The average of the local depth values is always 1/2.  Cohesion is
+partitioned local depth (see \code{cohesion_matrix}); the row-sums of the
+cohesion matrix are the values of local depth.
+
+One can optionally provide a pre-computed cohesion matrix using the
+optional input \code{is_cohesion = TRUE}.
 }
 \examples{
-D<-dist(exdata1)
+
+D <- dist(exdata1)
 local_depths(D)
-C<-cohesion_matrix(D)
-local_depths(C, is.cohesion =  TRUE)
-#local depths are the row sums of the cohesion matrix
+C <- cohesion_matrix(D)
+local_depths(C, is_cohesion =  TRUE)
+
+## local depths are the row sums of the cohesion matrix
 rowSums(C)
-#cognate distance data
-ld_lang<-sort(local_depths(cognate_dist))
+
+## cognate distance data
+
+ld_lang <- sort(local_depths(cognate_dist))
 }

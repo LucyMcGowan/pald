@@ -7,7 +7,7 @@
 local_depths(d, is_cohesion = FALSE)
 }
 \arguments{
-\item{d}{A matrix of pairwise distances or \code{dist} object.}
+\item{d}{A matrix of pairwise distances or a \code{\link{dist}} object.}
 
 \item{is_cohesion}{Logical. Set to TRUE when \code{d} is a pre-computed cohesion
 matrix; the default is \code{FALSE}.}

@@ -7,7 +7,7 @@
 cohesion_matrix(d)
 }
 \arguments{
-\item{d}{A distance matrix or \code{dist} object.}
+\item{d}{A matrix of pairwise distances or a \code{\link{dist}} object.}
 }
 \value{
 The matrix, C, of cohesion values.

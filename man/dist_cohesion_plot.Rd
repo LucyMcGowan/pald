@@ -14,7 +14,7 @@ dist_cohesion_plot(
 )
 }
 \arguments{
-\item{d}{A matrix of distance values.}
+\item{d}{A matrix of pairwise distances or a \code{\link{dist}} object.}
 
 \item{mutual}{Set to \code{TRUE} to consider mutual cohesion (i.e., symmetrized
 using the minimum); the default is \code{FALSE}.}

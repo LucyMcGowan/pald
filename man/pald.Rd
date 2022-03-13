@@ -16,7 +16,7 @@ pald(
 )
 }
 \arguments{
-\item{d}{A \code{dist} object or matrix of pairwise distances.}
+\item{d}{A matrix of pairwise distances or a \code{\link{dist}} object.}
 
 \item{show_plot}{Set to \code{TRUE} to display plot; the default is \code{TRUE}.}
 

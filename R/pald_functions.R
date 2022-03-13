@@ -17,7 +17,7 @@
 #' Cohesion is partitioned local depth (see [`local_depths`]) and thus the row
 #' sums of the cohesion matrix provide a measure of local depth centrality.
 #'
-#' @param d A distance matrix or `dist` object.
+#' @param d A matrix of pairwise distances or a [`dist`] object.
 #' @return The matrix, C, of cohesion values.
 #' @examples
 #'
@@ -85,7 +85,7 @@ cohesion_matrix <- function(d) {
 #' One can optionally provide a pre-computed cohesion matrix using the
 #' optional input `is_cohesion = TRUE`.
 #'
-#' @param d A matrix of pairwise distances or `dist` object.
+#' @param d A matrix of pairwise distances or a [`dist`] object.
 #' @param is_cohesion Logical. Set to TRUE when `d` is a pre-computed cohesion
 #' matrix; the default is `FALSE`.
 #'
@@ -412,7 +412,7 @@ plot_community_graphs <- function(c,
 #' each of the above functions.
 #'
 #'
-#' @param d A `dist` object or matrix of pairwise distances.
+#' @param d A matrix of pairwise distances or a [`dist`] object.
 #' @param show_plot Set to `TRUE` to display plot; the default is `TRUE`.
 #' @param show_labels Set to `FALSE` to omit vertex labels (to display a subset
 #'   of labels, use optional parameter `vertex_lab` to modify the label list).
@@ -528,7 +528,7 @@ pald <- function(d,
 #' only wants to observe mutual cohesion (i.e., cohesion made symmetric via
 #' the minimum), set `mutual = TRUE`.
 #'
-#' @param d A matrix of distance values.
+#' @param d A matrix of pairwise distances or a [`dist`] object.
 #' @param mutual Set to `TRUE` to consider mutual cohesion (i.e., symmetrized
 #'   using the minimum); the default is `FALSE`.
 #' @param xlim_max If desired, set the maximum value of distance which

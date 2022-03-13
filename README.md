@@ -1,6 +1,6 @@
 Partitioned Local Depth
 ================
-Katherine Moore and Kenneth Berenhaut
+Katherine Moore, Kenneth Berenhaut, and Lucy D’Agostino McGowan
 January 2022
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -49,9 +49,9 @@ The only information extracted from the distance matrix are
 within-triplet dissimilarity comparisons. As a result, outputs are
 unaffected by monotone transformations of the collection of distances
 (e.g., log<sub>2</sub>). Further, one may transform any measure of
-similarity, *s*(*x*, *y*), to a measure of dissimilarity, *d*(*x*, *y*),
+similarity, *s*(*x*,*y*), to a measure of dissimilarity, *d*(*x*,*y*),
 via any order-reversing monotone transformation, for instance by taking
-*d*(*x*, *y*) = 1/(1 + *s*(*x*, *y*)). This provides the user some
+*d*(*x*,*y*) = 1/(1+*s*(*x*,*y*)). This provides the user some
 flexibility in the choice of dissimilarity (e.g., triangle inequality is
 not required) and care should be taken at this stage.
 
@@ -74,12 +74,27 @@ considered “(community) clusters.” Note that the Fruchterman Reingold
 somewhat different graph layouts each time it is run.
 
 ``` r
-par(mfrow=c(1,2), pty="s")  
-D<-dist(exdata1)
-pald_results<-pald(D, emph_strong = 1, vertex.label.cex = 3)
+par(mfrow = c(1, 2), pty = "s")  
+
+D <- dist(exdata1)
+pald_results <- pald(D, emph_strong = 1, vertex.label.cex = 3)
+
 ###
-plot(exdata1, pch = 16, xlim = c(-2.5, 2.25), ylim=c(-1.5, 3.25), xlab="", ylab="",  main = "Local Depths")
-text(exdata1 + .23, lab = round(pald_results$local_depths, 2), xlim = c(-2.5, 2.25), ylim=c(-1.5, 3.25), xlab="", ylab="", cex=.8)
+
+plot(exdata1,
+     pch = 16,
+     xlim = c(-2.5, 2.25),
+     ylim=c(-1.5, 3.25),
+     xlab = "", 
+     ylab = "",  
+     main = "Local Depths")
+text(exdata1 + .23, 
+     lab = round(pald_results$local_depths, 2), 
+     xlim = c(-2.5, 2.25),
+     ylim = c(-1.5, 3.25), 
+     xlab = "", 
+     ylab = "", 
+     cex = .8)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
@@ -103,14 +118,14 @@ Cohesion reflects relationship strength from the perspective of relative
 position, see (Berenhaut, Moore, and Melvin 2022). To begin PaLD
 analysis, we must first compute the matrix of cohesion values from the
 input distance matrix or `dist` object. Note that cohesion is not
-symmetric. The values, *C*\[*x*, *w*\], in the cohesion matrix are
+symmetric. The values, *C*\[*x*,*w*\], in the cohesion matrix are
 interpretable probabilities which capture the strength of the alignment
 of *w* to *x*. The sum of the cohesion matrix is always equal to *n*/2
 (where *n* is the number of data points).
 
 ``` r
-D<-dist(exdata1);
-C<-cohesion_matrix(D);
+D <- dist(exdata1)
+C <- cohesion_matrix(D)
 round(C, 4)
 #>        1      2      3      4      5      6      7      8
 #> 1 0.1658 0.1199 0.1199 0.0179 0.0179 0.0000 0.0000 0.0000
@@ -121,6 +136,7 @@ round(C, 4)
 #> 6 0.0000 0.0000 0.0204 0.0765 0.1599 0.2075 0.1599 0.0179
 #> 7 0.0000 0.0179 0.0000 0.0595 0.0799 0.1216 0.1871 0.0357
 #> 8 0.0000 0.0799 0.0000 0.0000 0.0000 0.0179 0.0357 0.1514
+
 #A heat-map of the cohesion matrix
 image(t(apply(C, 2, rev)), main = "Cohesion Matrix Heatmap")
 ```
@@ -136,7 +152,7 @@ row sums of the cohesion matrix. See also Figure 2(b), above. The
 average of the values of local depth is always equal to 1/2.
 
 ``` r
-#local depths are obtained by computing: rowSums(C)
+# local depths are obtained by computing: rowSums(C)
 local_depths(C)
 #>         1         2         3         4         5         6         7         8 
 #> 0.6012755 0.5000000 0.4851190 0.3427721 0.4885204 0.4474490 0.4869898 0.6478741
@@ -152,16 +168,16 @@ half the average of the diagonal of the cohesion matrix. A function for
 computing this is provided.
 
 ``` r
-#the threshold is obtained by computing: mean(diag(C))/2
+# the threshold is obtained by computing: mean(diag(C))/2
 strong_threshold(C)
 #> [1] 0.08866922
 ```
 
 Pairs of points for which mutual cohesion (i.e.,
 min {*C*<sub>*x*, *w*</sub>, *C*<sub>*w*, *x*</sub>}) is greater than
-the above threshold are considered to be \`\`strongly cohesive." The
+the above threshold are considered to be \`\`strongly cohesive.” The
 thresholded and symmetrized cohesion matrix can be obtained using the
-function ‘cohesion\_strong.’
+function ‘cohesion_strong.’
 
 ``` r
 round(cohesion_strong(C), 4)
@@ -198,10 +214,9 @@ of the community graph is desired, one could employ other methods (for
 instance, the Louvain method) to the resulting community graphs.
 
 ``` r
-graphs<-community_graphs(C)
+graphs <- community_graphs(C)
 
 library(igraph)
-#> Warning: package 'igraph' was built under R version 4.1.2
 clusters(graphs$G_strong)$membership
 #> 1 2 3 4 5 6 7 8 
 #> 1 1 1 1 2 2 2 3
@@ -226,10 +241,15 @@ graph on the original data, that is, plot the network using the layout
 provided by the orignal data.
 
 ``` r
-par(pty="s")
-plot(exdata1, xlim= c(0, 1), ylim = c(0, 1), col="white", xlab="", ylab="")
-par(new=TRUE)
-plot_community_graphs(C, layout = exdata1, show.labels = FALSE)
+par(pty = "s")
+plot(exdata1,
+     xlim = c(0, 1), 
+     ylim = c(0, 1), 
+     col = "white",
+     xlab = "", 
+     ylab = "")
+par(new = TRUE)
+plot_community_graphs(C, layout = exdata1, show_labels = FALSE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
@@ -246,14 +266,20 @@ interpretation of these plots.
 Let’s re-create Figure 2 in (Berenhaut, Moore, and Melvin 2022).
 
 ``` r
-D<-dist(exdata2)
-C<-cohesion_matrix(D)
-par(mfrow=c(1,2))
+D <- dist(exdata2)
+C <- cohesion_matrix(D)
+par(mfrow = c(1, 2))
 par(pty = "s")
-plot(exdata2, col="white", xlab="", ylab="")
-par(new=TRUE)
-plot_community_graphs(C, layout = exdata2, show.labels = FALSE, vertex.size = 3)
-dist_cohesion_plot(D, cex = .8, weak_gray=TRUE)
+plot(exdata2,
+     col = "white",
+     xlab = "",
+     ylab = "")
+par(new = TRUE)
+plot_community_graphs(C,
+                      layout = exdata2,
+                      show_labels = FALSE,
+                      vertex.size = 3)
+dist_cohesion_plot(D, cex = .8, weak_gray = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
@@ -264,7 +290,7 @@ y) and y-coordinate min{C(x, w), C(w, x)}.
 
 ``` r
 par(pty = "s")
-D<-dist(exdata2)
+D <- dist(exdata2)
 dist_cohesion_plot(D, mutual = TRUE)
 ```
 
@@ -279,13 +305,27 @@ cohesion matrix. We overlay the community graphs on the data set using
 `plot_community_graphs` and use our original data as the `layout`.
 
 ``` r
-ex_data<-matrix(runif(30), ncol=2)
-D<-dist(ex_data)
-C<-cohesion_matrix(D)
-par(pty="s")
-plot(ex_data, xlim= c(0, 1), ylim = c(0, 1), col="white", xlab="", ylab="")
-par(new=TRUE)
-plot_community_graphs(C, layout=ex_data, vertex.size=8, emph_strong = 1, edge.width.factor = 50, show.labels=FALSE)
+ex_data <- matrix(runif(30), ncol = 2)
+D <- dist(ex_data)
+C <- cohesion_matrix(D)
+par(pty = "s")
+plot(
+  ex_data,
+  xlim = c(0, 1),
+  ylim = c(0, 1),
+  col = "white",
+  xlab = "",
+  ylab = ""
+)
+par(new = TRUE)
+plot_community_graphs(
+  C,
+  layout = ex_data,
+  emph_strong = 1,
+  show.labels = FALSE,
+  edge.width.factor = 50,
+  vertex.size = 8
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
@@ -299,10 +339,17 @@ aesthetics of the plot. Note that the network layout is somewhat
 different each time the FR network drawing algorithm is called.
 
 ``` r
-C_lang<-cohesion_matrix(cognate_dist)
-lang_lab_subset<- rownames(C_lang)
-lang_lab_subset[sample(1:87, 50)]<-''
-plot_community_graphs(C_lang, vertex.lab = lang_lab_subset, vertex.label.cex=.65, edge.width.factor = 30,  emph_strong = 3,vertex.size = 3)
+C_lang <- cohesion_matrix(cognate_dist)
+lang_lab_subset <- rownames(C_lang)
+lang_lab_subset[sample(1:87, 50)] <- ''
+plot_community_graphs(
+  C_lang,
+  edge_width_factor = 30,
+  emph_strong = 3,
+  vertex.label = lang_lab_subset,
+  vertex.label.cex = .65,
+  vertex.size = 3
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
@@ -321,11 +368,12 @@ One can determine the (strongly cohesive) neighbors using igraph’s
 cohesion) and can be found direcly from the cohesion matrix.
 
 ``` r
-G_strong_lang<-community_graphs(C_lang)$G_strong
+G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 1efeefa:
+#> + 8/87 vertices, named, from fdff111:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
+
 #And print associated neighborhood weights
 C_lang["French", neighbors(G_strong_lang, "French")]
 #>         Italian           Ladin       Provencal         Walloon French_Creole_C 
@@ -345,12 +393,25 @@ clusters (i.e., *k* = 8) both *k*-means and heirarchical clustering did
 not give the desired result.
 
 ``` r
-D3<-dist(exdata3)
-C3<-cohesion_matrix(D3)
-par(pty="s")
-plot(exdata3, col="white", xlab="", ylab="", main = "PaLD Community Graphs")
-par(new=TRUE)
-plot_community_graphs(C3, layout=as.matrix(exdata3), show.labels = FALSE, emph_strong = 25, edge.width.factor = 2, vertex.size = 5)
+D3 <- dist(exdata3)
+C3 <- cohesion_matrix(D3)
+par(pty = "s")
+plot(
+  exdata3,
+  col = "white",
+  xlab = "",
+  ylab = "",
+  main = "PaLD Community Graphs"
+)
+par(new = TRUE)
+plot_community_graphs(
+  C3,
+  layout = as.matrix(exdata3),
+  show_labels = FALSE,
+  emph_strong = 25,
+  edge_width_factor = 2,
+  vertex.size = 5
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
@@ -358,7 +419,7 @@ plot_community_graphs(C3, layout=as.matrix(exdata3), show.labels = FALSE, emph_s
 ``` r
 ### The cluster vector is provided by `pald' and also may be computed via:
 library(igraph)
-cluster_graph<-community_graphs(C3)$G_strong
+cluster_graph <- community_graphs(C3)$G_strong
 #pald_cluster_vector<- clusters(cluster_graph)$membership
 table(clusters(cluster_graph)$membership)
 #> 
@@ -370,12 +431,52 @@ Here are the results for the data obtained from *k*-means and
 hierarchical clustering when *k* = 8.
 
 ``` r
-pald_colors <- c("#5F4690", "#73AF48", "#1D6996", "#CC503E", "#38A6A5", "#EDAD08", "#994E95","#0F8554",   "#CC6677", "#E17C05", "#94346E",  "#666666", "#88CCEE", "#AA4499","#117733", "#332288", "#44AA99","#6F4070", "#999933",  "#DDCC77","#882255", "#661100", "#6699CC", "#888888")
-par(mfrow=c(1,2), pty="s")
-km_clusters<-kmeans(exdata3, 8)$cluster
-plot(exdata3, pch = 16, col = pald_colors[km_clusters], xlab="", ylab="", main = "K-Means Clusters (k = 8)")
-h_clusters<-cutree(hclust(dist(exdata3)), k = 8)
-plot(exdata3, pch = 16, col = pald_colors[h_clusters], xlab="", ylab="", main = "Hiearchical Clusters (k = 8)")
+pald_colors <-
+  c(
+    "#5F4690",
+    "#73AF48",
+    "#1D6996",
+    "#CC503E",
+    "#38A6A5",
+    "#EDAD08",
+    "#994E95",
+    "#0F8554",
+    "#CC6677",
+    "#E17C05",
+    "#94346E",
+    "#666666",
+    "#88CCEE",
+    "#AA4499",
+    "#117733",
+    "#332288",
+    "#44AA99",
+    "#6F4070",
+    "#999933",
+    "#DDCC77",
+    "#882255",
+    "#661100",
+    "#6699CC",
+    "#888888"
+  )
+par(mfrow = c(1, 2), pty = "s")
+km_clusters <- kmeans(exdata3, 8)$cluster
+plot(
+  exdata3,
+  pch = 16,
+  col = pald_colors[km_clusters],
+  xlab = "",
+  ylab = "",
+  main = "K-Means Clusters (k = 8)"
+)
+h_clusters <- cutree(hclust(dist(exdata3)), k = 8)
+plot(
+  exdata3,
+  pch = 16,
+  col = pald_colors[h_clusters],
+  xlab = "",
+  ylab = "",
+  main = "Hiearchical Clusters (k = 8)"
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />

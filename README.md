@@ -34,6 +34,13 @@ You can install the development version of pald from
 devtools::install_github("moorekatherine/pald")
 ```
 
+*Note this is temporarily at:*
+
+``` r
+# install.packages("devtools")
+devtools::install_github("LucyMcGowan/pald-1")
+```
+
 ``` r
 library(pald)
 ```
@@ -63,7 +70,7 @@ examples here, we will use the default Euclidean distance.
 
 For demonstration purposes, let’s begin with the small example from
 Figure 1 in (Berenhaut, Moore, and Melvin 2022).  
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 The wrapper function `pald` computes the cohesion matrix from which
 local depths are determined and community networks may be formed. In the
@@ -97,7 +104,7 @@ text(exdata1 + .23,
      cex = .8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 The wrapper function pald returns a list containing: the cohesion
 matrix, local depths, (community) clusters, the threshold for
@@ -141,7 +148,7 @@ round(C, 4)
 image(t(apply(C, 2, rev)), main = "Cohesion Matrix Heatmap")
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ## Local Depths
 
@@ -232,7 +239,7 @@ algorithm will provide somewhat different layouts each time it is run.
 plot_community_graphs(C) 
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 You can save a particular network layout using
 `community_graphs(C)$layout`.The function `plot_community_graphs` can
@@ -252,7 +259,7 @@ par(new = TRUE)
 plot_community_graphs(C, layout = exdata1, show_labels = FALSE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
 
 ## Cohesion Against Distance
 
@@ -282,7 +289,7 @@ plot_community_graphs(C,
 dist_cohesion_plot(D, cex = .8, weak_gray = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 Rather than showing both pairs, (d(x, y), C(x, w)) and (d(x, y), C(w,
 x)) as distinct points in the plot, setting `mutual = TRUE` will only
 plot mutual cohesion, that is the set of points with x-coordinate d(x,
@@ -294,7 +301,7 @@ D <- dist(exdata2)
 dist_cohesion_plot(D, mutual = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 ## Randomly-Generated Data
 
@@ -328,7 +335,7 @@ plot_community_graphs(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 ## Cognate-based Language Families
 
@@ -352,7 +359,7 @@ plot_community_graphs(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
 
 One could alternatively use the wrapper function:
 `pald(cognate_dist,vertex.lab = lang_lab_subset, vertex.label.cex=.65, edge.width.factor = 30, emph_strong = 3,vertex.size = 3)`.
@@ -370,7 +377,7 @@ cohesion) and can be found direcly from the cohesion matrix.
 ``` r
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from fdff111:
+#> + 8/87 vertices, named, from 495fd89:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 
@@ -414,7 +421,7 @@ plot_community_graphs(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
 
 ``` r
 ### The cluster vector is provided by `pald' and also may be computed via:
@@ -479,7 +486,7 @@ plot(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 

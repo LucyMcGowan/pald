@@ -5,9 +5,6 @@ date: "January 2022"
 bibliography: pald_package.bib
 output: github_document
 ---
-```{r}
-
-```
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -40,6 +37,12 @@ You can install the development version of pald from [GitHub](https://github.com
 ``` r
 # install.packages("devtools")
 devtools::install_github("moorekatherine/pald")
+```
+
+*Note this is temporarily at:*
+``` r
+# install.packages("devtools")
+devtools::install_github("LucyMcGowan/pald-1")
 ```
 
 ```{r example, results='hide'}

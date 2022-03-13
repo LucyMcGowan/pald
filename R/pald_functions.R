@@ -267,7 +267,7 @@ community_graphs <- function(c) {
 #' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
 #'
 #' @return Logical, indicating whether any points are isolated.
-#'
+#' @export
 any_isolated <- function(c) {
   c_symmetric <- pmin(c, t(c))
   cdiagz <- c_symmetric

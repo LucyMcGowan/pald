@@ -21,7 +21,7 @@ pald(
 \item{show_plot}{Set to \code{TRUE} to display plot; the default is \code{TRUE}.}
 
 \item{show_labels}{Set to \code{FALSE} to omit vertex labels (to display a subset
-of labels, use optional parameter \code{vertex_lab} to modify the label list).
+of labels, use optional parameter \code{vertex.label} to modify the label list).
 Default: \code{TRUE}.}
 
 \item{only_strong}{Set to \code{TRUE} if only strong ties, G_strong, should be

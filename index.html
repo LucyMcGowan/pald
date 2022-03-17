@@ -303,7 +303,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="va">G_strong_lang</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C_lang</span><span class="op">)</span><span class="op">$</span><span class="va">G_strong</span>
 <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html" class="external-link">neighbors</a></span><span class="op">(</span><span class="va">G_strong_lang</span>, <span class="st">"French"</span><span class="op">)</span>
-<span class="co">#&gt; + 8/87 vertices, named, from abe5e63:</span>
+<span class="co">#&gt; + 8/87 vertices, named, from 260ab2a:</span>
 <span class="co">#&gt; [1] Italian         Ladin           Provencal       Walloon        </span>
 <span class="co">#&gt; [5] French_Creole_C French_Creole_D Spanish         Catalan</span>
 
@@ -350,34 +350,7 @@
 <span class="co">#&gt; 40 40 60 20 20 20 20 20</span></code></pre></div>
 <p>Here are the results for the data obtained from <em>k</em>-means and hierarchical clustering when <em>k</em> = 8.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pald_colors</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-    <span class="st">"#5F4690"</span>,
-    <span class="st">"#73AF48"</span>,
-    <span class="st">"#1D6996"</span>,
-    <span class="st">"#CC503E"</span>,
-    <span class="st">"#38A6A5"</span>,
-    <span class="st">"#EDAD08"</span>,
-    <span class="st">"#994E95"</span>,
-    <span class="st">"#0F8554"</span>,
-    <span class="st">"#CC6677"</span>,
-    <span class="st">"#E17C05"</span>,
-    <span class="st">"#94346E"</span>,
-    <span class="st">"#666666"</span>,
-    <span class="st">"#88CCEE"</span>,
-    <span class="st">"#AA4499"</span>,
-    <span class="st">"#117733"</span>,
-    <span class="st">"#332288"</span>,
-    <span class="st">"#44AA99"</span>,
-    <span class="st">"#6F4070"</span>,
-    <span class="st">"#999933"</span>,
-    <span class="st">"#DDCC77"</span>,
-    <span class="st">"#882255"</span>,
-    <span class="st">"#661100"</span>,
-    <span class="st">"#6699CC"</span>,
-    <span class="st">"#888888"</span>
-  <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="va">km_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">kmeans</a></span><span class="op">(</span><span class="va">exdata3</span>, <span class="fl">8</span><span class="op">)</span><span class="op">$</span><span class="va">cluster</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
   <span class="va">exdata3</span>,

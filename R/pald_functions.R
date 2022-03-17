@@ -421,12 +421,7 @@ plot_community_graphs <- function(c,
 
   # if no vector of color names is given, a default list (of length 24) is given
   if (is.null(colors)) {
-    colors <- c(
-      "#5F4690", "#73AF48", "#1D6996", "#CC503E", "#38A6A5",
-      "#EDAD08", "#994E95", "#0F8554", "#CC6677", "#E17C05",
-      "#94346E",  "#666666", "#88CCEE", "#AA4499", "#117733",
-      "#332288", "#44AA99", "#6F4070", "#999933",  "#DDCC77",
-      "#882255", "#661100", "#6699CC", "#888888")
+    colors <- pald::pald_colors
   }
 
   old <- list(egde.color = dots[["edge.color"]],

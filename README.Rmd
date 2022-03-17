@@ -305,33 +305,6 @@ table(clusters(cluster_graph)$membership)
 Here are the results for the data obtained from *k*-means and hierarchical clustering when $k = 8$.  
 
 ```{r k-mean}
-pald_colors <-
-  c(
-    "#5F4690",
-    "#73AF48",
-    "#1D6996",
-    "#CC503E",
-    "#38A6A5",
-    "#EDAD08",
-    "#994E95",
-    "#0F8554",
-    "#CC6677",
-    "#E17C05",
-    "#94346E",
-    "#666666",
-    "#88CCEE",
-    "#AA4499",
-    "#117733",
-    "#332288",
-    "#44AA99",
-    "#6F4070",
-    "#999933",
-    "#DDCC77",
-    "#882255",
-    "#661100",
-    "#6699CC",
-    "#888888"
-  )
 par(mfrow = c(1, 2), pty = "s")
 km_clusters <- kmeans(exdata3, 8)$cluster
 plot(

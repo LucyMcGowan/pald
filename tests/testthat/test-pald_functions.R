@@ -45,8 +45,8 @@ test_that("cohesion_strong works", {
 
 test_that("any_isolated works", {
   d <- data.frame(
-    X1 = c(1, 2, 3, 6),
-    X2 = c(2, 1, 3, 10)
+    x1 = c(1, 2, 3, 6),
+    x2 = c(2, 1, 3, 10)
     )
   D <- dist(d)
   C <- cohesion_matrix(D)

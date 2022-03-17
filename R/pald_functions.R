@@ -310,8 +310,8 @@ community_graphs <- function(c) {
 #' @return Logical, indicating whether any points are isolated.
 #' @examples
 #' d <- data.frame(
-#'   X1 = c(1, 2, 3, 6),
-#'   X2 = c(2, 1, 3, 10)
+#'   x1 = c(1, 2, 3, 6),
+#'   x2 = c(2, 1, 3, 10)
 #'   )
 #' D <- dist(d)
 #' C <- cohesion_matrix(D)

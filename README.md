@@ -67,7 +67,7 @@ For demonstration purposes, let’s begin with the small example from
 Figure 1 in (Berenhaut, Moore, and Melvin 2022).  
 <img src="man/figures/README-fig-1-1.png" width="100%" />
 
-The wrapper function `pald` computes the cohesion matrix from which
+The wrapper function `pald()` computes the cohesion matrix from which
 local depths are determined and community networks may be formed. In the
 plots of the community networks, strongly cohesive pairs are colored
 according to connected component. Such connected components may be
@@ -101,18 +101,19 @@ text(exdata1 + .23,
 
 <img src="man/figures/README-pald-1.png" width="100%" />
 
-The wrapper function pald returns a list containing: the cohesion
+The wrapper function `pald()` returns a list containing: the cohesion
 matrix, local depths, (community) clusters, the threshold for
 identifying strong ties, the thresholded and symmetrized cohesion
 matrix, the community graph whose edges are weighted by mutual cohesion,
 the weighted graph of strong ties, and the layout provided by the FR
 network drawing algorithm applied to the community graph.
 
-Each time the function `pald` is called, the matrix of cohesion values
+Each time the function `pald()` is called, the matrix of cohesion values
 is re-computed. To avoid unnecessary computation, the following
-functions are included: `local_depths`,`strong_threshold`,
-`cohesion_strong`, `community_graphs`, and `plot_community_graphs`. We
-will now walk through each function in turn.
+functions are included: `local_depths()`,`strong_threshold()`,
+`cohesion_strong()`, `community_graphs()`, and
+`plot_community_graphs()`. We will now walk through each function in
+turn.
 
 ## Cohesion Matrix
 
@@ -138,8 +139,10 @@ round(C, 4)
 #> 6 0.0000 0.0000 0.0204 0.0765 0.1599 0.2075 0.1599 0.0179
 #> 7 0.0000 0.0179 0.0000 0.0595 0.0799 0.1216 0.1871 0.0357
 #> 8 0.0000 0.0799 0.0000 0.0000 0.0000 0.0179 0.0357 0.1514
+#> attr(,"class")
+#> [1] "cohesion_matrix" "matrix"          "array"
 
-#A heat-map of the cohesion matrix
+# A heat-map of the cohesion matrix
 image(t(apply(C, 2, rev)), main = "Cohesion Matrix Heatmap")
 ```
 
@@ -157,7 +160,7 @@ average of the values of local depth is always equal to 1/2.
 # local depths are obtained by computing: rowSums(C)
 local_depths(C)
 #>         1         2         3         4         5         6         7         8 
-#> 0.6012755 0.5000000 0.4851190 0.3427721 0.4885204 0.4474490 0.4869898 0.6478741
+#> 0.4413265 0.5418367 0.4653061 0.6246599 0.4982993 0.6420068 0.5017007 0.2848639
 mean(local_depths(C))
 #> [1] 0.5
 ```
@@ -192,6 +195,8 @@ round(cohesion_strong(C), 4)
 #> 6 0.0000 0.0000 0.0000 0.0000 0.1216 0.2075 0.1216 0.0000
 #> 7 0.0000 0.0000 0.0000 0.0000 0.0000 0.1216 0.1871 0.0000
 #> 8 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.1514
+#> attr(,"class")
+#> [1] "cohesion_matrix" "matrix"          "array"
 ```
 
 ## Community Structure and Display
@@ -257,7 +262,7 @@ plot(exdata1,
      xlab = "", 
      ylab = "")
 par(new = TRUE)
-plot_community_graphs(C, layout = exdata1, show_labels = FALSE)
+plot_community_graphs(C, layout = as.matrix(exdata1), show_labels = FALSE)
 ```
 
 <img src="man/figures/README-comm-2-1.png" width="100%" />
@@ -265,8 +270,8 @@ plot_community_graphs(C, layout = exdata1, show_labels = FALSE)
 ## Cohesion Against Distance
 
 Observe that cohesion is not a direct transformation of distance. The
-`dist_cohesion_plot` function provides a plot of pairwise distances and
-associated value(s) of cohesion; the horizontal line indicates the
+`dist_cohesion_plot()` function provides a plot of pairwise distances
+and associated value(s) of cohesion; the horizontal line indicates the
 threshold. Within-cluster edges are colored, and weak ties are plotted
 as open circles. See (Berenhaut, Moore, and Melvin 2022) for more on the
 interpretation of these plots.
@@ -284,7 +289,7 @@ plot(exdata2,
      ylab = "")
 par(new = TRUE)
 plot_community_graphs(C,
-                      layout = exdata2,
+                      layout = as.matrix(exdata2),
                       show_labels = FALSE,
                       vertex.size = 3)
 dist_cohesion_plot(D, cex = .8, weak_gray = TRUE)
@@ -380,7 +385,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 69ebfbc:
+#> + 8/87 vertices, named, from 8f88f06:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

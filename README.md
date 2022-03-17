@@ -385,7 +385,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 8f88f06:
+#> + 8/87 vertices, named, from abe5e63:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 
@@ -404,7 +404,7 @@ density, see discussion in (Berenhaut, Moore, and Melvin 2022). Note
 that PaLD was able to detect the eight natural groups within the data
 without the use of any additional inputs (e.g., number of clusters) nor
 optimization criteria. Despite providing the “correct” number of
-clusters (i.e., *k* = 8) both *k*-means and heirarchical clustering did
+clusters (i.e., *k* = 8) both *k*-means and hierarchical clustering did
 not give the desired result.
 
 ``` r

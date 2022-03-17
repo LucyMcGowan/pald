@@ -272,7 +272,7 @@ C_lang["French", neighbors(G_strong_lang, "French")]
 
 ## Clustering in the Presence of Varying Density
 
-Cohesion is particularly useful when considering data with varying local density, see discussion in [@bmm22].  Note that PaLD was able to detect the eight natural groups within the data without the use of any additional inputs (e.g., number of clusters) nor optimization criteria.  Despite providing the "correct" number of clusters (i.e., $k = 8$) both *k*-means and heirarchical clustering did not give the desired result.  
+Cohesion is particularly useful when considering data with varying local density, see discussion in [@bmm22].  Note that PaLD was able to detect the eight natural groups within the data without the use of any additional inputs (e.g., number of clusters) nor optimization criteria.  Despite providing the "correct" number of clusters (i.e., $k = 8$) both *k*-means and hierarchical clustering did not give the desired result.  
 
 
 ```{r vary-d}

@@ -385,7 +385,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from abe5e63:
+#> + 8/87 vertices, named, from 260ab2a:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 
@@ -446,33 +446,6 @@ Here are the results for the data obtained from *k*-means and
 hierarchical clustering when *k* = 8.
 
 ``` r
-pald_colors <-
-  c(
-    "#5F4690",
-    "#73AF48",
-    "#1D6996",
-    "#CC503E",
-    "#38A6A5",
-    "#EDAD08",
-    "#994E95",
-    "#0F8554",
-    "#CC6677",
-    "#E17C05",
-    "#94346E",
-    "#666666",
-    "#88CCEE",
-    "#AA4499",
-    "#117733",
-    "#332288",
-    "#44AA99",
-    "#6F4070",
-    "#999933",
-    "#DDCC77",
-    "#882255",
-    "#661100",
-    "#6699CC",
-    "#888888"
-  )
 par(mfrow = c(1, 2), pty = "s")
 km_clusters <- kmeans(exdata3, 8)$cluster
 plot(

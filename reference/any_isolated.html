@@ -68,9 +68,9 @@
 <span class="r-in">  X1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">6</span><span class="op">)</span>,</span>
 <span class="r-in">  X2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="va">distance_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">c_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">distance_mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">any_isolated</span><span class="op">(</span><span class="va">c_mat</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">any_isolated</span><span class="op">(</span><span class="va">C</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> These points have no (strong nor weak) ties: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> * 4</span>
 </code></pre></div>

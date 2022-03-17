@@ -16,7 +16,13 @@
     <loc>https://lucymcgowan.github.io/pald/index.html</loc>
   </url>
   <url>
+    <loc>https://lucymcgowan.github.io/pald/reference/aggregation.html</loc>
+  </url>
+  <url>
     <loc>https://lucymcgowan.github.io/pald/reference/any_isolated.html</loc>
+  </url>
+  <url>
+    <loc>https://lucymcgowan.github.io/pald/reference/as_cohesion_matrix.html</loc>
   </url>
   <url>
     <loc>https://lucymcgowan.github.io/pald/reference/cognate_dist.html</loc>
@@ -52,6 +58,12 @@
     <loc>https://lucymcgowan.github.io/pald/reference/local_depths.html</loc>
   </url>
   <url>
+    <loc>https://lucymcgowan.github.io/pald/reference/noisy_circles.html</loc>
+  </url>
+  <url>
+    <loc>https://lucymcgowan.github.io/pald/reference/noisy_moons.html</loc>
+  </url>
+  <url>
     <loc>https://lucymcgowan.github.io/pald/reference/pald.html</loc>
   </url>
   <url>
@@ -61,6 +73,6 @@
     <loc>https://lucymcgowan.github.io/pald/reference/strong_threshold.html</loc>
   </url>
   <url>
-    <loc>https://lucymcgowan.github.io/pald/reference/tissue_cohesion_matrix.html</loc>
+    <loc>https://lucymcgowan.github.io/pald/reference/tissue_dist.html</loc>
   </url>
 </urlset>

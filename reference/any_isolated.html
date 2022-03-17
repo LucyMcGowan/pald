@@ -54,13 +54,27 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>c</dt>
-<dd><p>A matrix of cohesion values (see <code><a href="cohesion_matrix.html">cohesion_matrix</a></code>).</p></dd>
+<dd><p>A <code>cohesion_matrix</code> object, a matrix of cohesion values
+(see <code><a href="cohesion_matrix.html">cohesion_matrix</a></code>).</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Logical, indicating whether any points are isolated.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">  X1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span class="r-in">  X2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="va">distance_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">c_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">distance_mat</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">any_isolated</span><span class="op">(</span><span class="va">c_mat</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> These points have no (strong nor weak) ties: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> * 4</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

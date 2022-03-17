@@ -54,7 +54,8 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>c</dt>
-<dd><p>A matrix of cohesion values (see <code>cohesion_matrix</code>).</p></dd>
+<dd><p>A <code>cohesion_matrix</code> object, a matrix of cohesion values
+(see <code><a href="cohesion_matrix.html">cohesion_matrix</a></code>).</p></dd>
 <dt>symmetric</dt>
 <dd><p>Logical. Whether the returned matrix should be made
 symmetric (using the minimum); the default is <code>TRUE</code>.</p></dd>
@@ -134,6 +135,8 @@ the adjacency matrix for the graph of strong ties (the cluster graph), see
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14 0.09230159 0.00000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15 0.12563492 0.00000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16 0.00000000 0.10145503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cohesion_matrix" "matrix"          "array"          </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## To illustrate the calculation performed</span></span>
 <span class="r-in"><span class="va">C_strong</span> <span class="op">&lt;-</span> <span class="va">C</span></span>

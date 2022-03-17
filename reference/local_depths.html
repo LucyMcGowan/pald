@@ -51,16 +51,14 @@ object).</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">local_depths</span><span class="op">(</span><span class="va">d</span>, is_cohesion <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">local_depths</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>d</dt>
-<dd><p>A matrix of pairwise distances or a <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> object.</p></dd>
-<dt>is_cohesion</dt>
-<dd><p>Logical. Set to TRUE when <code>d</code> is a pre-computed cohesion
-matrix; the default is <code>FALSE</code>.</p></dd>
+<dd><p>A matrix of pairwise distances, a <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> object, or a
+<code><a href="cohesion_matrix.html">cohesion_matrix</a></code> object.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -72,10 +70,8 @@ matrix; the default is <code>FALSE</code>.</p></dd>
 relative position and centrality via distance comparisons
 (i.e., d(z, x) &lt; d(z, y)).</p>
 <p>The average of the local depth values is always 1/2.  Cohesion is
-partitioned local depth (see <code>cohesion_matrix</code>); the row-sums of the
+partitioned local depth (see <code><a href="cohesion_matrix.html">cohesion_matrix</a></code>); the row-sums of the
 cohesion matrix are the values of local depth.</p>
-<p>One can optionally provide a pre-computed cohesion matrix using the
-optional input <code>is_cohesion = TRUE</code>.</p>
     </div>
 
     <div class="section level2">
@@ -86,7 +82,7 @@ optional input <code>is_cohesion = TRUE</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         1         2         3         4         5         6         7         8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.4413265 0.5418367 0.4653061 0.6246599 0.4982993 0.6420068 0.5017007 0.2848639 </span>
 <span class="r-in"><span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">local_depths</span><span class="op">(</span><span class="va">C</span>, is_cohesion <span class="op">=</span>  <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">local_depths</span><span class="op">(</span><span class="va">C</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         1         2         3         4         5         6         7         8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.4413265 0.5418367 0.4653061 0.6246599 0.4982993 0.6420068 0.5017007 0.2848639 </span>
 <span class="r-in"></span>

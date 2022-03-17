@@ -141,16 +141,16 @@ Sci., 119(4), 2022.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.6395671 0.5760317 0.5462169 0.6084392 0.6162338 0.4563023 0.4387963 0.4474603 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         9        10        11        12        13        14        15        16 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.4534687 0.4462963 0.4737302 0.4422985 0.5204365 0.5435185 0.4591270 0.3320767 </span>
-<span class="r-in"><span class="fu">pald</span><span class="op">(</span><span class="va">D</span>, layout <span class="op">=</span> <span class="va">exdata2</span>, show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">pald</span><span class="op">(</span><span class="va">D</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">exdata2</span><span class="op">)</span>, show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="pald-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="local_depths.html">local_depths</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         1         2         3         4         5         6         7         8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.4650153 0.5014963 0.4455869 0.4191026 0.4703724 0.4526313 0.4431130 0.4943688 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.6395671 0.5760317 0.5462169 0.6084392 0.6162338 0.4563023 0.4387963 0.4474603 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         9        10        11        12        13        14        15        16 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.4358196 0.5865308 0.5845864 0.4061583 0.5702015 0.5203007 0.5707479 0.6339684 </span>
-<span class="r-in"><span class="fu"><a href="plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span>, layout <span class="op">=</span> <span class="va">exdata2</span>, show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.4534687 0.4462963 0.4737302 0.4422985 0.5204365 0.5435185 0.4591270 0.3320767 </span>
+<span class="r-in"><span class="fu"><a href="plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">exdata2</span><span class="op">)</span>, show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">pald_languages</span> <span class="op">&lt;-</span> <span class="fu">pald</span><span class="op">(</span><span class="va">cognate_dist</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="pald-3.png" alt="" width="700" height="433"></span>

@@ -102,7 +102,7 @@
 <h2 id="a-small-example">A Small Example<a class="anchor" aria-label="anchor" href="#a-small-example"></a>
 </h2>
 <p>For demonstration purposes, let’s begin with the small example from Figure 1 in (Berenhaut, Moore, and Melvin 2022).<br><img src="reference/figures/README-fig-1-1.png" width="100%"></p>
-<p>The wrapper function <code>pald</code> computes the cohesion matrix from which local depths are determined and community networks may be formed. In the plots of the community networks, strongly cohesive pairs are colored according to connected component. Such connected components may be considered “(community) clusters.” Note that the Fruchterman Reingold (FR) force-directed network drawing algorithm employed here will provide somewhat different graph layouts each time it is run.</p>
+<p>The wrapper function <code><a href="reference/pald.html">pald()</a></code> computes the cohesion matrix from which local depths are determined and community networks may be formed. In the plots of the community networks, strongly cohesive pairs are colored according to connected component. Such connected components may be considered “(community) clusters.” Note that the Fruchterman Reingold (FR) force-directed network drawing algorithm employed here will provide somewhat different graph layouts each time it is run.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>  
 
@@ -126,8 +126,8 @@
      ylab <span class="op">=</span> <span class="st">""</span>, 
      cex <span class="op">=</span> <span class="fl">.8</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-pald-1.png" width="100%"></p>
-<p>The wrapper function pald returns a list containing: the cohesion matrix, local depths, (community) clusters, the threshold for identifying strong ties, the thresholded and symmetrized cohesion matrix, the community graph whose edges are weighted by mutual cohesion, the weighted graph of strong ties, and the layout provided by the FR network drawing algorithm applied to the community graph.</p>
-<p>Each time the function <code>pald</code> is called, the matrix of cohesion values is re-computed. To avoid unnecessary computation, the following functions are included: <code>local_depths</code>,<code>strong_threshold</code>, <code>cohesion_strong</code>, <code>community_graphs</code>, and <code>plot_community_graphs</code>. We will now walk through each function in turn.</p>
+<p>The wrapper function <code><a href="reference/pald.html">pald()</a></code> returns a list containing: the cohesion matrix, local depths, (community) clusters, the threshold for identifying strong ties, the thresholded and symmetrized cohesion matrix, the community graph whose edges are weighted by mutual cohesion, the weighted graph of strong ties, and the layout provided by the FR network drawing algorithm applied to the community graph.</p>
+<p>Each time the function <code><a href="reference/pald.html">pald()</a></code> is called, the matrix of cohesion values is re-computed. To avoid unnecessary computation, the following functions are included: <code><a href="reference/local_depths.html">local_depths()</a></code>,<code><a href="reference/strong_threshold.html">strong_threshold()</a></code>, <code><a href="reference/cohesion_strong.html">cohesion_strong()</a></code>, <code><a href="reference/community_graphs.html">community_graphs()</a></code>, and <code><a href="reference/plot_community_graphs.html">plot_community_graphs()</a></code>. We will now walk through each function in turn.</p>
 </div>
 <div class="section level2">
 <h2 id="cohesion-matrix">Cohesion Matrix<a class="anchor" aria-label="anchor" href="#cohesion-matrix"></a>
@@ -146,8 +146,10 @@
 <span class="co">#&gt; 6 0.0000 0.0000 0.0204 0.0765 0.1599 0.2075 0.1599 0.0179</span>
 <span class="co">#&gt; 7 0.0000 0.0179 0.0000 0.0595 0.0799 0.1216 0.1871 0.0357</span>
 <span class="co">#&gt; 8 0.0000 0.0799 0.0000 0.0000 0.0000 0.0179 0.0357 0.1514</span>
+<span class="co">#&gt; attr(,"class")</span>
+<span class="co">#&gt; [1] "cohesion_matrix" "matrix"          "array"</span>
 
-<span class="co">#A heat-map of the cohesion matrix</span>
+<span class="co"># A heat-map of the cohesion matrix</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">C</span>, <span class="fl">2</span>, <span class="va">rev</span><span class="op">)</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Cohesion Matrix Heatmap"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-cohesion-1.png" width="100%"></p>
 </div>
@@ -159,7 +161,7 @@
 <code class="sourceCode R"><span class="co"># local depths are obtained by computing: rowSums(C)</span>
 <span class="fu"><a href="reference/local_depths.html">local_depths</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span>
 <span class="co">#&gt;         1         2         3         4         5         6         7         8 </span>
-<span class="co">#&gt; 0.6012755 0.5000000 0.4851190 0.3427721 0.4885204 0.4474490 0.4869898 0.6478741</span>
+<span class="co">#&gt; 0.4413265 0.5418367 0.4653061 0.6246599 0.4982993 0.6420068 0.5017007 0.2848639</span>
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="reference/local_depths.html">local_depths</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.5</span></code></pre></div>
 </div>
@@ -182,7 +184,9 @@
 <span class="co">#&gt; 5 0.0000 0.0000 0.0000 0.0000 0.1871 0.1216 0.0000 0.0000</span>
 <span class="co">#&gt; 6 0.0000 0.0000 0.0000 0.0000 0.1216 0.2075 0.1216 0.0000</span>
 <span class="co">#&gt; 7 0.0000 0.0000 0.0000 0.0000 0.0000 0.1216 0.1871 0.0000</span>
-<span class="co">#&gt; 8 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.1514</span></code></pre></div>
+<span class="co">#&gt; 8 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.1514</span>
+<span class="co">#&gt; attr(,"class")</span>
+<span class="co">#&gt; [1] "cohesion_matrix" "matrix"          "array"</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="community-structure-and-display">Community Structure and Display<a class="anchor" aria-label="anchor" href="#community-structure-and-display"></a>
@@ -217,13 +221,13 @@
      xlab <span class="op">=</span> <span class="st">""</span>, 
      ylab <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="reference/plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span>, layout <span class="op">=</span> <span class="va">exdata1</span>, show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">exdata1</span><span class="op">)</span>, show_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-comm-2-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="cohesion-against-distance">Cohesion Against Distance<a class="anchor" aria-label="anchor" href="#cohesion-against-distance"></a>
 </h2>
-<p>Observe that cohesion is not a direct transformation of distance. The <code>dist_cohesion_plot</code> function provides a plot of pairwise distances and associated value(s) of cohesion; the horizontal line indicates the threshold. Within-cluster edges are colored, and weak ties are plotted as open circles. See (Berenhaut, Moore, and Melvin 2022) for more on the interpretation of these plots.</p>
+<p>Observe that cohesion is not a direct transformation of distance. The <code><a href="reference/dist_cohesion_plot.html">dist_cohesion_plot()</a></code> function provides a plot of pairwise distances and associated value(s) of cohesion; the horizontal line indicates the threshold. Within-cluster edges are colored, and weak ties are plotted as open circles. See (Berenhaut, Moore, and Melvin 2022) for more on the interpretation of these plots.</p>
 <p>Let’s re-create Figure 2 in (Berenhaut, Moore, and Melvin 2022).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata2</span><span class="op">)</span>
@@ -236,7 +240,7 @@
      ylab <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>new <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="reference/plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span>,
-                      layout <span class="op">=</span> <span class="va">exdata2</span>,
+                      layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">exdata2</span><span class="op">)</span>,
                       show_labels <span class="op">=</span> <span class="cn">FALSE</span>,
                       vertex.size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="fu"><a href="reference/dist_cohesion_plot.html">dist_cohesion_plot</a></span><span class="op">(</span><span class="va">D</span>, cex <span class="op">=</span> <span class="fl">.8</span>, weak_gray <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -299,7 +303,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="va">G_strong_lang</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C_lang</span><span class="op">)</span><span class="op">$</span><span class="va">G_strong</span>
 <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html" class="external-link">neighbors</a></span><span class="op">(</span><span class="va">G_strong_lang</span>, <span class="st">"French"</span><span class="op">)</span>
-<span class="co">#&gt; + 8/87 vertices, named, from 69ebfbc:</span>
+<span class="co">#&gt; + 8/87 vertices, named, from 8f88f06:</span>
 <span class="co">#&gt; [1] Italian         Ladin           Provencal       Walloon        </span>
 <span class="co">#&gt; [5] French_Creole_C French_Creole_D Spanish         Catalan</span>
 

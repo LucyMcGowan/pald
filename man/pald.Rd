@@ -83,11 +83,11 @@ each of the above functions.
 D <- dist(exdata2)
 pald_results <- pald(D)
 pald_results$local_depths
-pald(D, layout = exdata2, show_labels = FALSE)
+pald(D, layout = as.matrix(exdata2), show_labels = FALSE)
 
 C <- cohesion_matrix(D)
 local_depths(C)
-plot_community_graphs(C, layout = exdata2, show_labels = FALSE)
+plot_community_graphs(C, layout = as.matrix(exdata2), show_labels = FALSE)
 
 pald_languages <- pald(cognate_dist)
 head(pald_languages$local_depths)

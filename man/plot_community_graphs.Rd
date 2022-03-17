@@ -15,7 +15,8 @@ plot_community_graphs(
 )
 }
 \arguments{
-\item{c}{A matrix of cohesion values (see \code{\link{cohesion_matrix}}).}
+\item{c}{A \code{cohesion_matrix} object, a matrix of cohesion values
+(see \code{\link{cohesion_matrix}}).}
 
 \item{show_labels}{Set to \code{FALSE} to omit vertex labels (to display a subset
 of labels, use optional parameter \code{vertex.label} to modify the label list).
@@ -65,7 +66,7 @@ only and does not influence the network layout.
 }
 \examples{
 C <- cohesion_matrix(dist(exdata1))
-plot_community_graphs(C, emph_strong = 1, layout = exdata1)
+plot_community_graphs(C, emph_strong = 1, layout = as.matrix(exdata1))
 plot_community_graphs(C, only_strong = TRUE)
 
 C2 <- cohesion_matrix(cognate_dist)

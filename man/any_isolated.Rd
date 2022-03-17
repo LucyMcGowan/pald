@@ -7,11 +7,21 @@
 any_isolated(c)
 }
 \arguments{
-\item{c}{A matrix of cohesion values (see \code{\link{cohesion_matrix}}).}
+\item{c}{A \code{cohesion_matrix} object, a matrix of cohesion values
+(see \code{\link{cohesion_matrix}}).}
 }
 \value{
 Logical, indicating whether any points are isolated.
 }
 \description{
 Checks for isolated points.
+}
+\examples{
+d <- data.frame(
+  X1 = c(1, 2, 3, 6),
+  X2 = c(2, 1, 3, 10)
+  )
+distance_mat <- dist(d)
+c_mat <- cohesion_matrix(distance_mat)
+any_isolated(c_mat)
 }

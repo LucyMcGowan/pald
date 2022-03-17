@@ -10,24 +10,28 @@ cohesion_matrix(d)
 \item{d}{A matrix of pairwise distances or a \code{\link{dist}} object.}
 }
 \value{
-The matrix, C, of cohesion values.
+The matrix of cohesion values. An object of class \code{cohesion_matrix}.
 }
 \description{
 Creates a matrix of (pairwise) cohesion values from a matrix of pairwise
-distances or a 'dist' object.
+distances or a \code{\link{dist}} object.
 }
 \details{
 Computes the matrix of (pairwise) cohesion values, C_xw, from a matrix of
-pairwise distances or 'dist' object. Cohesion is an interpretable probability
-that reflects the strength of alignment of a point, w, to another point, x.
+pairwise distances or a \code{\link{dist}} object. Cohesion is an interpretable probability
+that reflects the strength of alignment of a point, \code{w}, to another point, \code{x}.
 The rows of the cohesion matrix can be seen as providing neighborhood
 weights.  These values may be used for defining associated weighted graphs
-(for the purpose of community analysis) as in BMM22.
+(for the purpose of community analysis) as in  Berenhaut, Moore, and
+Melvin (2022).
 
 Given an n x n distance matrix, the sum of the entries in the resulting
 cohesion matrix is always equal to n/2.
 Cohesion is partitioned local depth (see \code{\link{local_depths}}) and thus the row
 sums of the cohesion matrix provide a measure of local depth centrality.
+
+If you have a matrix that is already a cohesion matrix and you would like to
+add the class, see \code{\link[=as_cohesion_matrix]{as_cohesion_matrix()}}.
 }
 \examples{
 

@@ -5,7 +5,7 @@
 \alias{exdata2}
 \title{Example Data 2}
 \format{
-A data frame with 16 rows and 2 variables.
+A data frame with 16 rows and 2 columns, \code{x1} and \code{x2}
 }
 \usage{
 exdata2

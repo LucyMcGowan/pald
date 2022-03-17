@@ -7,7 +7,8 @@
 community_graphs(c)
 }
 \arguments{
-\item{c}{A matrix of cohesion values (see \code{\link{cohesion_matrix}}).}
+\item{c}{A \code{cohesion_matrix} object, a matrix of cohesion values
+(see \code{\link{cohesion_matrix}}).}
 }
 \value{
 A list consisting of:

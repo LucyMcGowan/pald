@@ -27,3 +27,33 @@ message_glue <- function(..., .sep = "", .envir = parent.frame(),
     y
   } else x
 }
+
+is_cohesion_matrix <- function(x) inherits(x, "cohesion_matrix")
+
+check_cohesion_matrix <- function(x) {
+  if (!is_cohesion_matrix(x)) {
+    stop_glue("You input an object of type:\n * {class(x)}\nThis funtion is ",
+    "expecting an input of type `cohesion_matrix`. See the `cohesion_matrix` ",
+    "function or use `as_cohesion_matrix()` to convert an object of type `matrix`",
+    "to a `cohesion_matrix`.")
+  }
+}
+
+check_dist <- function(x) {
+  if (inherits(x, "dist")) {
+    return(round(as.matrix(x), 15))
+  }
+
+  if (!is.matrix(x)) {
+    stop_glue("`d` is not a distance matrix or `dist` object. You input an ",
+    "object of type:\n * {class(x)}\nPlease provide a distance matrix or ",
+    "`dist` object")
+  }
+
+  if (!isSymmetric.matrix(x)) {
+    stop_glue("`d` is not symmetric square matrix. Please provide a distance ",
+    "matrix or `dist` object")
+  }
+
+  return(round(x, 15))
+}

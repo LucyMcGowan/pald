@@ -8,6 +8,6 @@
 #' on perceived distances reveals deep community structure. Proc. Natl.
 #' Acad. Sci., 119(4), 2022.
 #'
-#' @format A data frame with 16 rows and 2 variables.
+#' @format A data frame with 16 rows and 2 columns, `x1` and `x2`
 #'
 "exdata2"

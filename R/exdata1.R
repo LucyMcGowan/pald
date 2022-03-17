@@ -7,6 +7,6 @@
 #' @references K. S. Berenhaut, K. E. Moore, R. L. Melvin, A social perspective
 #' on perceived distances reveals deep community structure. Proc. Natl.
 #' Acad. Sci., 119(4), 2022.
-#' @format A data frame with 8 rows and 2 variables.
+#' @format A data frame with 8 rows and 2 columns, `x1` and `x2`
 #'
 "exdata1"

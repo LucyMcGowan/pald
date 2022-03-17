@@ -7,7 +7,8 @@
 community_clusters(c)
 }
 \arguments{
-\item{c}{A matrix of cohesion values (see \code{\link{cohesion_matrix}}).}
+\item{c}{A \code{cohesion_matrix} object, a matrix of cohesion values
+(see \code{\link{cohesion_matrix}}).}
 }
 \value{
 A data frame with two columns:

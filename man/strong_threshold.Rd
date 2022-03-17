@@ -7,7 +7,8 @@
 strong_threshold(c)
 }
 \arguments{
-\item{c}{A matrix of cohesion values (see \code{cohesion_matrix}).}
+\item{c}{A \code{cohesion_matrix} object, a matrix of cohesion values
+(see \code{\link{cohesion_matrix}}).}
 }
 \value{
 The value of the threshold.

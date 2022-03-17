@@ -2,23 +2,27 @@
 #'
 #'
 #' Creates a matrix of (pairwise) cohesion values from a matrix of pairwise
-#' distances or a 'dist' object.
+#' distances or a [`dist`] object.
 #'
 #'
 #' Computes the matrix of (pairwise) cohesion values, C_xw, from a matrix of
-#' pairwise distances or 'dist' object. Cohesion is an interpretable probability
-#' that reflects the strength of alignment of a point, w, to another point, x.
+#' pairwise distances or a [`dist`] object. Cohesion is an interpretable probability
+#' that reflects the strength of alignment of a point, `w`, to another point, `x`.
 #' The rows of the cohesion matrix can be seen as providing neighborhood
 #' weights.  These values may be used for defining associated weighted graphs
-#' (for the purpose of community analysis) as in BMM22.
+#' (for the purpose of community analysis) as in  Berenhaut, Moore, and
+#' Melvin (2022).
 #'
 #' Given an n x n distance matrix, the sum of the entries in the resulting
 #' cohesion matrix is always equal to n/2.
 #' Cohesion is partitioned local depth (see [`local_depths`]) and thus the row
 #' sums of the cohesion matrix provide a measure of local depth centrality.
 #'
+#' If you have a matrix that is already a cohesion matrix and you would like to
+#' add the class, see [`as_cohesion_matrix()`].
+#'
 #' @param d A matrix of pairwise distances or a [`dist`] object.
-#' @return The matrix, C, of cohesion values.
+#' @return The matrix of cohesion values. An object of class `cohesion_matrix`.
 #' @examples
 #'
 #' plot(exdata1)
@@ -38,33 +42,61 @@
 #'
 #' @export
 cohesion_matrix <- function(d) {
-  d <- round(as.matrix(d), 15) ## Rounds distances to fifteen decimal places
-  if (dim(d)[1] != dim(d)[2]) {
-    stop_glue("`d` is not a square matrix.\n",
-              "Please provide a distance matrix or 'dist' object")
-  } else {
-    n <- dim(d)[1]
-    if (is.null(rownames(d)[1])) {
-      rownames(d) <- 1:n
-    }
-    c <- matrix(0, n, n)
-    for (x in 1:(n - 1)) {
-      for (y in (x + 1):n) {
-        dx <- d[, x]
-        dy <- d[, y]
-        uxy <- (which((dx <= d[y, x]) | (dy <= d[x, y])))
-        wx <- 1 * (dx[uxy] < dy[uxy]) + .5 * ((dx[uxy] == dy[uxy]))
-        c[x, uxy] <- c[x, uxy] + 1 / (length(uxy)) * wx
-        c[y, uxy] <- c[y, uxy] + 1 / (length(uxy)) * (1 - wx)
-      }
-    }
-    rownames(c) <- rownames(d)
-    colnames(c) <- rownames(d)
-    return(c / (n - 1))
+  d <- check_dist(d)
+  n <- dim(d)[1]
+  if (is.null(rownames(d)[1])) {
+    rownames(d) <- 1:n
   }
+  c <- matrix(0, n, n)
+  for (x in 1:(n - 1)) {
+    for (y in (x + 1):n) {
+      dx <- d[, x]
+      dy <- d[, y]
+      uxy <- (which((dx <= d[y, x]) | (dy <= d[x, y])))
+      wx <- 1 * (dx[uxy] < dy[uxy]) + .5 * ((dx[uxy] == dy[uxy]))
+      c[x, uxy] <- c[x, uxy] + 1 / (length(uxy)) * wx
+      c[y, uxy] <- c[y, uxy] + 1 / (length(uxy)) * (1 - wx)
+    }
+  }
+  rownames(c) <- rownames(d)
+  colnames(c) <- rownames(d)
+
+  c <- as_cohesion_matrix(c / (n - 1))
+
+  return(c)
 }
 
 
+#' Coerce a matrix to a cohesion matrix object
+#'
+#' `as_cohesion_matrix()` converts an existing matrix into an object of class
+#' `cohesion_matrix`.
+#'
+#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#'
+#' @return Object of class `cohesion_matrix`
+#' @export
+#'
+#' @examples
+#' C <- matrix(
+#'   c(0.25, 0.125, 0.125, 0,
+#'    0.125, 0.25, 0, 0.125,
+#'    0.125, 0, 0.25, 0.125,
+#'    0, 0.125, 0.125, 0.25
+#' ), nrow = 4, byrow = TRUE)
+#'
+#' class(C)
+#'
+#' C <- as_cohesion_matrix(C)
+#' class(C)
+as_cohesion_matrix <- function(c) {
+  if (!is.matrix(c)) {
+    stop_glue("The cohesion matrix input must be a matrix.\n * You input an",
+              "object of class `{class(c)}`")
+  }
+  cl <- class(c)
+  structure(c, class = c("cohesion_matrix", cl))
+}
 
 #' Local (Community) Depths
 #'
@@ -76,15 +108,12 @@ cohesion_matrix <- function(d) {
 #' (i.e., d(z, x) < d(z, y)).
 #'
 #' The average of the local depth values is always 1/2.  Cohesion is
-#' partitioned local depth (see `cohesion_matrix`); the row-sums of the
+#' partitioned local depth (see [`cohesion_matrix`]); the row-sums of the
 #' cohesion matrix are the values of local depth.
 #'
-#' One can optionally provide a pre-computed cohesion matrix using the
-#' optional input `is_cohesion = TRUE`.
 #'
-#' @param d A matrix of pairwise distances or a [`dist`] object.
-#' @param is_cohesion Logical. Set to TRUE when `d` is a pre-computed cohesion
-#' matrix; the default is `FALSE`.
+#' @param d A matrix of pairwise distances, a [`dist`] object, or a
+#'   [`cohesion_matrix`] object.
 #'
 #' @return A vector of local depths.
 #' @examples
@@ -92,7 +121,7 @@ cohesion_matrix <- function(d) {
 #' D <- dist(exdata1)
 #' local_depths(D)
 #' C <- cohesion_matrix(D)
-#' local_depths(C, is_cohesion =  TRUE)
+#' local_depths(C)
 #'
 #' ## local depths are the row sums of the cohesion matrix
 #' rowSums(C)
@@ -101,13 +130,11 @@ cohesion_matrix <- function(d) {
 #'
 #' ld_lang <- sort(local_depths(cognate_dist))
 #' @export
-local_depths <- function(d, is_cohesion = FALSE) {
-  if (!is_cohesion) {
-    c <- cohesion_matrix(d)
-  } else {
-    c <- as.matrix(d)
+local_depths <- function(d) {
+  if (!is_cohesion_matrix(d)) {
+    d <- cohesion_matrix(d)
   }
-  return(apply(c, 1, sum))
+  return(apply(d, 1, sum))
 }
 
 
@@ -121,7 +148,8 @@ local_depths <- function(d, is_cohesion = FALSE) {
 #' The threshold is equal to half the average of the diagonal of the cohesion
 #' matrix, see Berenhaut, Moore, and Melvin (2022).
 #'
-#' @param c A matrix of cohesion values (see `cohesion_matrix`).
+#' @param c A `cohesion_matrix` object, a matrix of cohesion values
+#'   (see [`cohesion_matrix`]).
 #' @return The value of the threshold.
 #'
 #' @examples
@@ -144,6 +172,7 @@ local_depths <- function(d, is_cohesion = FALSE) {
 #'
 #' @export
 strong_threshold <- function(c) {
+  check_cohesion_matrix(c)
   return(mean(diag(c)) / 2)
 }
 
@@ -163,7 +192,8 @@ strong_threshold <- function(c) {
 #' the adjacency matrix for the graph of strong ties (the cluster graph), see
 #' [`community_graphs`] and [`pald`].
 #'
-#' @param c A matrix of cohesion values (see `cohesion_matrix`).
+#' @param c A `cohesion_matrix` object, a matrix of cohesion values
+#'   (see [`cohesion_matrix`]).
 #' @param symmetric Logical. Whether the returned matrix should be made
 #' symmetric (using the minimum); the default is `TRUE`.
 #' @return The symmetrized cohesion matrix in which all entries corresponding
@@ -195,6 +225,7 @@ strong_threshold <- function(c) {
 #' }
 #' @export
 cohesion_strong <- function(c, symmetric = TRUE) {
+  check_cohesion_matrix(c)
   threshold <- strong_threshold(c)
   c[c < threshold] <- 0
   if (symmetric == TRUE) {
@@ -223,7 +254,8 @@ cohesion_strong <- function(c, symmetric = TRUE) {
 #' force-directed graph drawing algorithm.  As a result, it may provide a
 #' somewhat different layout each time it is run.
 #'
-#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#' @param c A `cohesion_matrix` object, a matrix of cohesion values
+#'   (see [`cohesion_matrix`]).
 #' @return A list consisting of:
 #'  \itemize{
 #'        \item `G`: the weighted (community) graph whose edge weights are mutual
@@ -240,6 +272,7 @@ cohesion_strong <- function(c, symmetric = TRUE) {
 #' plot(community_graphs(C)$G_strong, layout = community_graphs(C)$layout)
 #' @export
 community_graphs <- function(c) {
+  check_cohesion_matrix(c)
   # relationship strength between x and w is mutual, i.e., min(Cxw, Cwx)
   c_symmetric <- pmin(c, t(c))
   g <- igraph::simplify(
@@ -252,9 +285,8 @@ community_graphs <- function(c) {
   )
   lay <- igraph::layout_with_fr(g)
 
-  # Points, x, for which mutual cohesion with all others are zero are omitted
-  # from the graph
-  # This prints an alert that such points are not included in G TODO: is this true?
+  # Points, x, for which mutual cohesion with all others are zero
+  # This prints an alert
   any_isolated(c)
   return(list(G = g, G_strong = g_strong, layout = lay))
 }
@@ -264,11 +296,21 @@ community_graphs <- function(c) {
 #'
 #' Checks for isolated points.
 #'
-#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#' @param c A `cohesion_matrix` object, a matrix of cohesion values
+#'   (see [`cohesion_matrix`]).
 #'
 #' @return Logical, indicating whether any points are isolated.
+#' @examples
+#' d <- data.frame(
+#'   X1 = c(1, 2, 3, 6),
+#'   X2 = c(2, 1, 3, 10)
+#'   )
+#' distance_mat <- dist(d)
+#' c_mat <- cohesion_matrix(distance_mat)
+#' any_isolated(c_mat)
 #' @export
 any_isolated <- function(c) {
+  check_cohesion_matrix(c)
   c_symmetric <- pmin(c, t(c))
   cdiagz <- c_symmetric
   diag(cdiagz) <- 0
@@ -299,7 +341,8 @@ any_isolated <- function(c) {
 #' Note that the parameter `emph_strong` is for visualization purposes
 #' only and does not influence the network layout.
 #'
-#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#' @param c A `cohesion_matrix` object, a matrix of cohesion values
+#'   (see [`cohesion_matrix`]).
 #' @param show_labels Set to `FALSE` to omit vertex labels (to display a subset
 #'   of labels, use optional parameter `vertex.label` to modify the label list).
 #'   Default: `TRUE`.
@@ -326,7 +369,7 @@ any_isolated <- function(c) {
 #' @return NULL
 #' @examples
 #' C <- cohesion_matrix(dist(exdata1))
-#' plot_community_graphs(C, emph_strong = 1, layout = exdata1)
+#' plot_community_graphs(C, emph_strong = 1, layout = as.matrix(exdata1))
 #' plot_community_graphs(C, only_strong = TRUE)
 #'
 #' C2 <- cohesion_matrix(cognate_dist)
@@ -342,6 +385,7 @@ plot_community_graphs <- function(c,
                                   colors = NULL,
                                   ...) {
 
+  check_cohesion_matrix(c)
   dots <- list(...)
 
   dots[["vertex.size"]] <- dots[["vertex.size"]] %||% 1
@@ -350,7 +394,7 @@ plot_community_graphs <- function(c,
   dots[["xlim"]] <- dots[["xlim"]] %||% c(-1, 1)
   dots[["ylim"]] <- dots[["ylim"]] %||% c(-1, 1)
 
-  # Hide vertex labels if show.labels=FALSE.  Otherwise, displays vertex labels.
+  # Hide vertex labels if show_labels = FALSE. Otherwise, displays vertex labels.
   if (!show_labels) {
     dots[["vertex.label"]] <- NA
   } else {
@@ -408,7 +452,8 @@ plot_community_graphs <- function(c,
 
 #' Community clusters
 #'
-#' @param c A matrix of cohesion values (see [`cohesion_matrix`]).
+#' @param c A `cohesion_matrix` object, a matrix of cohesion values
+#'   (see [`cohesion_matrix`]).
 #'
 #' @return A data frame with two columns:
 #'  * `point`: The points from cohesion matrix `c`
@@ -420,6 +465,7 @@ plot_community_graphs <- function(c,
 #' community_clusters(C)
 #' @export
 community_clusters <- function(c) {
+  check_cohesion_matrix(c)
   c_graphs <- community_graphs(c)
   cl <- igraph::clusters(c_graphs$G_strong)$membership
   data.frame(
@@ -483,11 +529,11 @@ community_clusters <- function(c) {
 #' D <- dist(exdata2)
 #' pald_results <- pald(D)
 #' pald_results$local_depths
-#' pald(D, layout = exdata2, show_labels = FALSE)
+#' pald(D, layout = as.matrix(exdata2), show_labels = FALSE)
 #'
 #' C <- cohesion_matrix(D)
 #' local_depths(C)
-#' plot_community_graphs(C, layout = exdata2, show_labels = FALSE)
+#' plot_community_graphs(C, layout = as.matrix(exdata2), show_labels = FALSE)
 #'
 #' pald_languages <- pald(cognate_dist)
 #' head(pald_languages$local_depths)
@@ -506,6 +552,7 @@ pald <- function(d,
                  colors = NULL,
                  ...) {
 
+  d <- check_dist(d)
   c <- cohesion_matrix(d)
   c_graphs <- community_graphs(c)
 
@@ -523,7 +570,7 @@ pald <- function(d,
   return(
     invisible(
       list(C = c,
-           local_depths = local_depths(c, is_cohesion = TRUE),
+           local_depths = local_depths(c),
            clusters = igraph::clusters(c_graphs$G_strong)$membership,
            threshold = strong_threshold(c),
            C_strong = cohesion_strong(c),
@@ -584,18 +631,13 @@ dist_cohesion_plot <- function(d,
                                cex = 1,
                                colors = NULL,
                                weak_gray = FALSE) {
-  graphics::par(xpd = FALSE)
+
+  d <- check_dist(d)
 
   if (is.null(xlim_max)) {
     xlim_max <- max(d)
   }
 
-  d <- as.matrix(d)
-
-  if (dim(d)[1] != dim(d)[2]) {
-    stop_glue("`d` is not a square matrix.\n",
-              "Please provide a distance matrix or 'dist' object")
-  }
   c <- cohesion_matrix(d)
 
   if (mutual) {

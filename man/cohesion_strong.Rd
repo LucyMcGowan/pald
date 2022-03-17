@@ -7,7 +7,8 @@
 cohesion_strong(c, symmetric = TRUE)
 }
 \arguments{
-\item{c}{A matrix of cohesion values (see \code{cohesion_matrix}).}
+\item{c}{A \code{cohesion_matrix} object, a matrix of cohesion values
+(see \code{\link{cohesion_matrix}}).}
 
 \item{symmetric}{Logical. Whether the returned matrix should be made
 symmetric (using the minimum); the default is \code{TRUE}.}

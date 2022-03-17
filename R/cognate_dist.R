@@ -1,6 +1,6 @@
 #' Cognate Data Distance Matrix
 #'
-#' A dist object describing distances between 87 Indo-European languages from
+#' A [`dist`] object describing distances between 87 Indo-European languages from
 #' the perspective of cognates.
 #'
 #' Cognate relationships from a collection of essential words were collected
@@ -11,6 +11,6 @@
 #' classification: A lexicostatistical experiment. Trans. Am. Phil. Soc. 82,
 #' iii-132 (1992).
 #'
-#' @format A dist object for 87 Indo-European languages.
+#' @format A [`dist`] object for 87 Indo-European languages.
 #'
 "cognate_dist"

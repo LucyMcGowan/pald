@@ -5,13 +5,13 @@
 \alias{cognate_dist}
 \title{Cognate Data Distance Matrix}
 \format{
-A dist object for 87 Indo-European languages.
+A \code{\link{dist}} object for 87 Indo-European languages.
 }
 \usage{
 cognate_dist
 }
 \description{
-A dist object describing distances between 87 Indo-European languages from
+A \code{\link{dist}} object describing distances between 87 Indo-European languages from
 the perspective of cognates.
 }
 \details{

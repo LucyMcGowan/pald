@@ -303,7 +303,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="va">G_strong_lang</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C_lang</span><span class="op">)</span><span class="op">$</span><span class="va">G_strong</span>
 <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html" class="external-link">neighbors</a></span><span class="op">(</span><span class="va">G_strong_lang</span>, <span class="st">"French"</span><span class="op">)</span>
-<span class="co">#&gt; + 8/87 vertices, named, from 8f88f06:</span>
+<span class="co">#&gt; + 8/87 vertices, named, from abe5e63:</span>
 <span class="co">#&gt; [1] Italian         Ladin           Provencal       Walloon        </span>
 <span class="co">#&gt; [5] French_Creole_C French_Creole_D Spanish         Catalan</span>
 
@@ -317,7 +317,7 @@
 <div class="section level2">
 <h2 id="clustering-in-the-presence-of-varying-density">Clustering in the Presence of Varying Density<a class="anchor" aria-label="anchor" href="#clustering-in-the-presence-of-varying-density"></a>
 </h2>
-<p>Cohesion is particularly useful when considering data with varying local density, see discussion in (Berenhaut, Moore, and Melvin 2022). Note that PaLD was able to detect the eight natural groups within the data without the use of any additional inputs (e.g., number of clusters) nor optimization criteria. Despite providing the “correct” number of clusters (i.e., <em>k</em> = 8) both <em>k</em>-means and heirarchical clustering did not give the desired result.</p>
+<p>Cohesion is particularly useful when considering data with varying local density, see discussion in (Berenhaut, Moore, and Melvin 2022). Note that PaLD was able to detect the eight natural groups within the data without the use of any additional inputs (e.g., number of clusters) nor optimization criteria. Despite providing the “correct” number of clusters (i.e., <em>k</em> = 8) both <em>k</em>-means and hierarchical clustering did not give the desired result.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">D3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata3</span><span class="op">)</span>
 <span class="va">C3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D3</span><span class="op">)</span>

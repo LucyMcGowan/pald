@@ -28,3 +28,6 @@ Depends:
 LazyData: true
 URL: https://github.com/moorekatherine/pald
 BugReports: https://github.com/moorekatherine/pald/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

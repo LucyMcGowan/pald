@@ -51,7 +51,7 @@ check_dist <- function(x) {
   }
 
   if (!isSymmetric.matrix(x)) {
-    stop_glue("`d` is not symmetric square matrix. Please provide a distance ",
+    stop_glue("`d` is not a symmetric square matrix. Please provide a distance ",
     "matrix or `dist` object")
   }
 

@@ -94,6 +94,14 @@ as_cohesion_matrix <- function(c) {
     stop_glue("The cohesion matrix input must be a matrix.\n * You input an",
               "object of class `{class(c)}`")
   }
+
+  if (dim(c)[1] != dim(c)[2]) {
+    stop_glue("The cohesion matrix must be a square matrix.")
+  }
+  if (is.null(rownames(c)[1])) {
+    rownames(c) <- 1:nrow(c)
+    colnames(c) <- 1:nrow(c)
+  }
   cl <- class(c)
   structure(c, class = c("cohesion_matrix", cl))
 }
@@ -305,9 +313,9 @@ community_graphs <- function(c) {
 #'   X1 = c(1, 2, 3, 6),
 #'   X2 = c(2, 1, 3, 10)
 #'   )
-#' distance_mat <- dist(d)
-#' c_mat <- cohesion_matrix(distance_mat)
-#' any_isolated(c_mat)
+#' D <- dist(d)
+#' C <- cohesion_matrix(D)
+#' any_isolated(C)
 #' @export
 any_isolated <- function(c) {
   check_cohesion_matrix(c)

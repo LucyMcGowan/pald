@@ -21,7 +21,7 @@ d <- data.frame(
   X1 = c(1, 2, 3, 6),
   X2 = c(2, 1, 3, 10)
   )
-distance_mat <- dist(d)
-c_mat <- cohesion_matrix(distance_mat)
-any_isolated(c_mat)
+D <- dist(d)
+C <- cohesion_matrix(D)
+any_isolated(C)
 }

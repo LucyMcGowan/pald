@@ -33,7 +33,13 @@ Berenhaut, Kenneth S., Katherine E. Moore, and Ryan L. Melvin. 2022. “A Social
 
 ## Installation
 
-You can install the development version of pald from [GitHub](https://github.com/) with:
+Install the CRAN version:
+
+```{r, eval = FALSE}
+install.packages("pald")
+```
+
+Or you can install the development version of pald from GitHub with:
 
 ``` r
 # install.packages("devtools")

@@ -28,8 +28,13 @@ Structure.” *Proceedings of the National Academy of Sciences,* 119 (3).
 
 ## Installation
 
-You can install the development version of pald from
-[GitHub](https://github.com/) with:
+Install the CRAN version:
+
+``` r
+install.packages("pald")
+```
+
+Or you can install the development version of pald from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -385,7 +390,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from a2e3ffe:
+#> + 8/87 vertices, named, from 0cd5e91:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

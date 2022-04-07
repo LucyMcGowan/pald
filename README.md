@@ -6,7 +6,7 @@ January 2022
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/LucyMcGowan/pald-1/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/LucyMcGowan/pald-1/actions/workflows/check-standard.yaml)
+[![R-CMD-check](https://github.com/LucyMcGowan/pald/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/LucyMcGowan/pald/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 This package provides an implementation of the Partitioned Local Depths
@@ -390,7 +390,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 795166e:
+#> + 8/87 vertices, named, from 85ca520:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

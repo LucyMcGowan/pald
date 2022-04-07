@@ -26,8 +26,8 @@ Imports:
 Depends: 
     R (>= 2.10)
 LazyData: true
-URL: https://github.com/moorekatherine/pald
-BugReports: https://github.com/moorekatherine/pald/issues
+URL: https://github.com/LucyMcGowan/pald
+BugReports: https://github.com/LucyMcGowan/pald/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

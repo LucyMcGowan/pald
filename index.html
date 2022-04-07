@@ -87,11 +87,14 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of pald from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Install the CRAN version:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pald"</span><span class="op">)</span></code></pre></div>
+<p>Or you can install the development version of pald from GitHub with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"LucyMcGowan/pald"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/moorekatherine/pald" class="external-link">pald</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -106,7 +109,7 @@
 </h2>
 <p>For demonstration purposes, let’s begin with the small example from Figure 1 in (Berenhaut, Moore, and Melvin 2022).<br><img src="reference/figures/README-fig-1-1.png" width="100%"></p>
 <p>The wrapper function <code><a href="reference/pald.html">pald()</a></code> computes the cohesion matrix from which local depths are determined and community networks may be formed. In the plots of the community networks, strongly cohesive pairs are colored according to connected component. Such connected components may be considered “(community) clusters.” Note that the Fruchterman Reingold (FR) force-directed network drawing algorithm employed here will provide somewhat different graph layouts each time it is run.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>  
 
 <span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata1</span><span class="op">)</span>
@@ -136,7 +139,7 @@
 <h2 id="cohesion-matrix">Cohesion Matrix<a class="anchor" aria-label="anchor" href="#cohesion-matrix"></a>
 </h2>
 <p>Cohesion reflects relationship strength from the perspective of relative position, see (Berenhaut, Moore, and Melvin 2022). To begin PaLD analysis, we must first compute the matrix of cohesion values from the input distance matrix or <code>dist</code> object. Note that cohesion is not symmetric. The values, <em>C</em>[<em>x</em>,<em>w</em>], in the cohesion matrix are interpretable probabilities which capture the strength of the alignment of <em>w</em> to <em>x</em>. The sum of the cohesion matrix is always equal to <em>n</em>/2 (where <em>n</em> is the number of data points).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata1</span><span class="op">)</span>
 <span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">C</span>, <span class="fl">4</span><span class="op">)</span>
@@ -160,7 +163,7 @@
 <h2 id="local-depths">Local Depths<a class="anchor" aria-label="anchor" href="#local-depths"></a>
 </h2>
 <p>Local depth is a probability which describes the support for each point in data-determined local foci. Cohesion is obtained by partitioning local depth, and thus the values of local depth can be computed as the row sums of the cohesion matrix. See also Figure 2(b), above. The average of the values of local depth is always equal to 1/2.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># local depths are obtained by computing: rowSums(C)</span>
 <span class="fu"><a href="reference/local_depths.html">local_depths</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span>
 <span class="co">#&gt;         1         2         3         4         5         6         7         8 </span>
@@ -172,12 +175,12 @@
 <h2 id="threshold-and-strong-ties">Threshold and Strong Ties<a class="anchor" aria-label="anchor" href="#threshold-and-strong-ties"></a>
 </h2>
 <p>The threshold provided in (Berenhaut, Moore, and Melvin 2022) for distinguishing between strongly and weakly cohesive pairs is equal to of half the average of the diagonal of the cohesion matrix. A function for computing this is provided.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># the threshold is obtained by computing: mean(diag(C))/2</span>
 <span class="fu"><a href="reference/strong_threshold.html">strong_threshold</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.08866922</span></code></pre></div>
 <p>Pairs of points for which mutual cohesion (i.e., min {<em>C</em><sub><em>x</em>, <em>w</em></sub>, <em>C</em><sub><em>w</em>, <em>x</em></sub>}) is greater than the above threshold are considered to be ``strongly cohesive.” The thresholded and symmetrized cohesion matrix can be obtained using the function ‘cohesion_strong.’</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="reference/cohesion_strong.html">cohesion_strong</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt;        1      2      3      4      5      6      7      8</span>
 <span class="co">#&gt; 1 0.1658 0.1199 0.1187 0.0000 0.0000 0.0000 0.0000 0.0000</span>
@@ -197,7 +200,7 @@
 <p>The overall structure of the data can be observed via the networks obtained from cohesion (referred to here as “community graphs”). The community graph is a symmetric, weighted graph which is obtained from symmetrizing the cohesion matrix (using min {<em>C</em><sub><em>x</em>, <em>w</em></sub>, <em>C</em><sub><em>w</em>, <em>x</em></sub>}) and removing self-loops. The “community cluster graph” is the subgraph consisting of only the edges for which mutual cohesion greater than the above threshold.</p>
 <p>The connected components of the community cluster graph, <code>G_strong</code>, are referred to the (community) clusters of the data. Note that no additional inputs (e.g., number of clusters, neighborhood size) nor optimization criteria are employed in (community) cluster identification.</p>
 <p>Strong ties between points will not be severed; if further partitioning of the community graph is desired, one could employ other methods (for instance, the Louvain method) to the resulting community graphs.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">graphs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/community_clusters.html">community_clusters</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span>
@@ -211,11 +214,11 @@
 <span class="co">#&gt; 7     7       2</span>
 <span class="co">#&gt; 8     8       3</span></code></pre></div>
 <p>A function for plotting the community graphs, in which the edges and vertices are colored according to cluster membership, is provided. The default layout is obtained via the Fruchterman Reingold (FR) force-directed graph drawing algorithm. Note that the FR force-directed algorithm will provide somewhat different layouts each time it is run.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span> </code></pre></div>
 <p><img src="reference/figures/README-comm-1.png" width="100%"></p>
 <p>You can save a particular network layout using <code>community_graphs(C)$layout</code>.The function <code>plot_community_graphs</code> can take a given layout as an argument. Below, let’s overlay the community graph on the original data, that is, plot the network using the layout provided by the orignal data.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">exdata1</span>,
      xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, 
@@ -232,7 +235,7 @@
 </h2>
 <p>Observe that cohesion is not a direct transformation of distance. The <code><a href="reference/dist_cohesion_plot.html">dist_cohesion_plot()</a></code> function provides a plot of pairwise distances and associated value(s) of cohesion; the horizontal line indicates the threshold. Within-cluster edges are colored, and weak ties are plotted as open circles. See (Berenhaut, Moore, and Melvin 2022) for more on the interpretation of these plots.</p>
 <p>Let’s re-create Figure 2 in (Berenhaut, Moore, and Melvin 2022).</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata2</span><span class="op">)</span>
 <span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
@@ -249,7 +252,7 @@
 <span class="fu"><a href="reference/dist_cohesion_plot.html">dist_cohesion_plot</a></span><span class="op">(</span><span class="va">D</span>, cex <span class="op">=</span> <span class="fl">.8</span>, weak_gray <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-fig-2-1.png" width="100%"></p>
 <p>Rather than showing both pairs, (d(x, y), C(x, w)) and (d(x, y), C(w, x)) as distinct points in the plot, setting <code>mutual = TRUE</code> will only plot mutual cohesion, that is the set of points with x-coordinate d(x, y) and y-coordinate min{C(x, w), C(w, x)}.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata2</span><span class="op">)</span>
 <span class="fu"><a href="reference/dist_cohesion_plot.html">dist_cohesion_plot</a></span><span class="op">(</span><span class="va">D</span>, mutual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -259,7 +262,7 @@
 <h2 id="randomly-generated-data">Randomly-Generated Data<a class="anchor" aria-label="anchor" href="#randomly-generated-data"></a>
 </h2>
 <p>In this example, we consider a randomly-generated data set of 15 points. Points are selected according to the uniform distribution on the unit square. We first compute the distance matrix and from this calculate the cohesion matrix. We overlay the community graphs on the data set using <code>plot_community_graphs</code> and use our original data as the <code>layout</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ex_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">ex_data</span><span class="op">)</span>
 <span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span>
@@ -287,7 +290,7 @@
 <h2 id="cognate-based-language-families">Cognate-based Language Families<a class="anchor" aria-label="anchor" href="#cognate-based-language-families"></a>
 </h2>
 <p>Let’s perform PaLD analysis on the cognate data set from (Dyen, Kruskal, and Black 1992). For clarity of the display, we show how to only include (a random set of the) 37 vertex labels. The remaining arguments are for aesthetics of the plot. Note that the network layout is somewhat different each time the FR network drawing algorithm is called.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">C_lang</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">cognate_dist</span><span class="op">)</span>
 <span class="va">lang_lab_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">C_lang</span><span class="op">)</span>
 <span class="va">lang_lab_subset</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">87</span>, <span class="fl">50</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">''</span>
@@ -302,11 +305,11 @@
 <p><img src="reference/figures/README-lang-1.png" width="100%"></p>
 <p>One could alternatively use the wrapper function: <code>pald(cognate_dist, emph_strong = 3, edge_width_factor = 30, vertex.label = lang_lab_subset, vertex.label.cex = .65, vertex.size = 3)</code>. It will return a list containing: the cohesion matrix, local depths, (community) clusters, the threshold for identifying strong ties, the thresholded and symmetrized cohesion matrix, the community graph whose edges are weighted by mutual cohesion, the weighted graph of strong ties, and the layout provided by the FR network drawing algorithm applied to the community graph.</p>
 <p>One can determine the (strongly cohesive) neighbors using igraph’s <code>neighbor</code> function. Edge-weights are given by cohesion (or mutual cohesion) and can be found directly from the cohesion matrix.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="va">G_strong_lang</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C_lang</span><span class="op">)</span><span class="op">$</span><span class="va">G_strong</span>
 <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html" class="external-link">neighbors</a></span><span class="op">(</span><span class="va">G_strong_lang</span>, <span class="st">"French"</span><span class="op">)</span>
-<span class="co">#&gt; + 8/87 vertices, named, from a2e3ffe:</span>
+<span class="co">#&gt; + 8/87 vertices, named, from 0cd5e91:</span>
 <span class="co">#&gt; [1] Italian         Ladin           Provencal       Walloon        </span>
 <span class="co">#&gt; [5] French_Creole_C French_Creole_D Spanish         Catalan</span>
 
@@ -321,7 +324,7 @@
 <h2 id="clustering-in-the-presence-of-varying-density">Clustering in the Presence of Varying Density<a class="anchor" aria-label="anchor" href="#clustering-in-the-presence-of-varying-density"></a>
 </h2>
 <p>Cohesion is particularly useful when considering data with varying local density, see discussion in (Berenhaut, Moore, and Melvin 2022). Note that PaLD was able to detect the eight natural groups within the data without the use of any additional inputs (e.g., number of clusters) nor optimization criteria. Despite providing the “correct” number of clusters (i.e., <em>k</em> = 8) both <em>k</em>-means and hierarchical clustering did not give the desired result.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">D3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">exdata3</span><span class="op">)</span>
 <span class="va">C3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cohesion_matrix.html">cohesion_matrix</a></span><span class="op">(</span><span class="va">D3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
@@ -342,7 +345,7 @@
   vertex.size <span class="op">=</span> <span class="fl">5</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-vary-d-1.png" width="100%"></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### The cluster vector is provided by `pald' and also may be computed via:</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="va">cluster_graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C3</span><span class="op">)</span><span class="op">$</span><span class="va">G_strong</span>
@@ -352,7 +355,7 @@
 <span class="co">#&gt;  1  2  3  4  5  6  7  8 </span>
 <span class="co">#&gt; 40 40 60 20 20 20 20 20</span></code></pre></div>
 <p>Here are the results for the data obtained from <em>k</em>-means and hierarchical clustering when <em>k</em> = 8.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="va">km_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">kmeans</a></span><span class="op">(</span><span class="va">exdata3</span>, <span class="fl">8</span><span class="op">)</span><span class="op">$</span><span class="va">cluster</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>

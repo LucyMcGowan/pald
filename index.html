@@ -217,7 +217,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_community_graphs.html">plot_community_graphs</a></span><span class="op">(</span><span class="va">C</span><span class="op">)</span> </code></pre></div>
 <p><img src="reference/figures/README-comm-1.png" width="100%"></p>
-<p>You can save a particular network layout using <code>community_graphs(C)$layout</code>.The function <code>plot_community_graphs</code> can take a given layout as an argument. Below, let’s overlay the community graph on the original data, that is, plot the network using the layout provided by the orignal data.</p>
+<p>You can save a particular network layout using <code>community_graphs(C)$layout</code>.The function <code>plot_community_graphs</code> can take a given layout as an argument. Below, let’s overlay the community graph on the original data, that is, plot the network using the layout provided by the original data.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">exdata1</span>,
@@ -309,7 +309,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="va">G_strong_lang</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/community_graphs.html">community_graphs</a></span><span class="op">(</span><span class="va">C_lang</span><span class="op">)</span><span class="op">$</span><span class="va">G_strong</span>
 <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html" class="external-link">neighbors</a></span><span class="op">(</span><span class="va">G_strong_lang</span>, <span class="st">"French"</span><span class="op">)</span>
-<span class="co">#&gt; + 8/87 vertices, named, from 0cd5e91:</span>
+<span class="co">#&gt; + 8/87 vertices, named, from 795166e:</span>
 <span class="co">#&gt; [1] Italian         Ladin           Provencal       Walloon        </span>
 <span class="co">#&gt; [5] French_Creole_C French_Creole_D Spanish         Catalan</span>
 

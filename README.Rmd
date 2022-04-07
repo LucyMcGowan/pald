@@ -167,7 +167,7 @@ A function for plotting the community graphs, in which the edges and vertices ar
 plot_community_graphs(C) 
 ```
 
-You can save a particular network layout using `community_graphs(C)$layout`.The function `plot_community_graphs` can take a given layout as an argument. Below, let's overlay the community graph on the original data, that is, plot the network using the layout provided by the orignal data.  
+You can save a particular network layout using `community_graphs(C)$layout`.The function `plot_community_graphs` can take a given layout as an argument. Below, let's overlay the community graph on the original data, that is, plot the network using the layout provided by the original data.  
 
 ```{r comm-2}
 par(pty = "s")

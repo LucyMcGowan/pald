@@ -256,7 +256,7 @@ You can save a particular network layout using
 `community_graphs(C)$layout`.The function `plot_community_graphs` can
 take a given layout as an argument. Below, let’s overlay the community
 graph on the original data, that is, plot the network using the layout
-provided by the orignal data.
+provided by the original data.
 
 ``` r
 par(pty = "s")
@@ -390,7 +390,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 0cd5e91:
+#> + 8/87 vertices, named, from 795166e:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

@@ -390,7 +390,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from 85ca520:
+#> + 8/87 vertices, named, from a44fbe8:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 
@@ -489,7 +489,6 @@ Structure.” *Proceedings of the National Academy of Sciences* 119 (3).
 Dyen, Isidore, Joseph B. Kruskal, and Paul Black. 1992. “An Indoeuropean
 Classification: A Lexicostatistical Experiment.” *Transactions of the
 American Philosophical Society* 82 (5): iii.
-<https://doi.org/10.2307/1006517>.
 
 </div>
 

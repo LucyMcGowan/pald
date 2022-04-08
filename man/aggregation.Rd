@@ -17,6 +17,5 @@ demonstrate clustering aggregation.
 \references{
 A. Gionis, H. Mannila, and P. Tsaparas, Clustering aggregation.
 ACM Transactions on Knowledge Discovery from Data (TKDD), 2007. 1(1): p. 1-30.
-Available at: \url{http://cs.joensuu.fi/sipu/datasets/}
 }
 \keyword{datasets}

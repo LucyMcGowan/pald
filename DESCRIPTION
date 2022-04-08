@@ -11,10 +11,12 @@ Description: Implementation of the Partitioned Local Depths (PaLD)
     approach which provides a measure of local depth and the cohesion of a point 
     to another which  (together with a universal threshold for distinguishing 
     strong and weak ties) may be used to reveal local and global structure in 
-    data. No extraneous inputs, distributional assumptions, iterative procedures 
-    nor optimization criteria are employed. This package includes functions for 
-    computing local depths and cohesion as well as flexible functions for 
-    plotting community networks and displays of cohesion against distance. 
+    data, based on methods described in Berenhaut, Moore, and Melvin (2022)
+    <doi:10.1073/pnas.2003634119>. No extraneous inputs, distributional 
+    assumptions, iterative procedures nor optimization criteria are employed. 
+    This package includes functions for computing local depths and cohesion as
+    well as flexible functions for plotting community networks and displays of 
+    cohesion against distance. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

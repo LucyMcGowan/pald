@@ -374,7 +374,7 @@ any_isolated <- function(c) {
 #'    * `vertex.label.cex` A numeric value for modifying the vertex label size.
 #'    (default = `1`)
 #'
-#' @return NULL
+#' @return A plot of the community graphs.
 #' @examples
 #' C <- cohesion_matrix(dist(exdata1))
 #' plot_community_graphs(C, emph_strong = 1, layout = as.matrix(exdata1))
@@ -431,6 +431,8 @@ plot_community_graphs <- function(c,
   ## Note: the default layout is still determined by G (consisting of both
   ## strong and weak ties)
   if (!only_strong) {
+    oldpar <- graphics::par(no.readonly = TRUE)
+    on.exit(graphics::par(oldpar))
     dots[["edge.color"]] <- "grey"
     dots[["edge.width"]] <- igraph::E(c_graphs$G)$weight * edge_width_factor
     dots[["x"]] <- c_graphs$G

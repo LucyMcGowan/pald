@@ -6,5 +6,5 @@
 
 ## Updates
 
-* Changed link in README to the moved link
-* Updated the DESCRIPTION with a reference (DOI) and correct issue link
+* Added return for `plot_community_graphs`
+* Updated function to reset users `par` settings on exit

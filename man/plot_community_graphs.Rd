@@ -48,6 +48,9 @@ the rownames of \code{c} are used
 (default = \code{1})
 }}
 }
+\value{
+A plot of the community graphs.
+}
 \description{
 Provides a plot of the community graphs, with connected components of the
 graph of strong ties colored by connected component.

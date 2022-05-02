@@ -2,7 +2,6 @@ test_that("check_dist works", {
   expect_error(check_dist("c"),  "`d` is not a distance matrix")
   expect_error(check_dist(1), "`d` is not a distance matrix")
   non_sym_mat <- matrix(c(1, 2, 3))
-  expect_error(check_dist(non_sym_mat), "`d` is not a symmetric square matrix")
   d <- dist(non_sym_mat)
   expect_true(is.matrix(check_dist(d)))
 })

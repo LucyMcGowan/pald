@@ -195,7 +195,7 @@ strong_threshold <- function(c) {
 #' Values of the cohesion matrix which are less than the threshold are set to
 #' zero.
 #' The symmetrization, if desired, is computed using the entry-wise (parallel)
-#' minimum of C and ts transpose (i.e., `min(C_ij, C_ji)`).
+#' minimum of C and its transpose (i.e., `min(C_ij, C_ji)`).
 #' The matrix provided by cohesion_strong (with default `symmetric = TRUE`) is
 #' the adjacency matrix for the graph of strong ties (the cluster graph), see
 #' [`community_graphs`] and [`pald`].

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pald_functions.R
 \name{pald}
 \alias{pald}
-\title{Partitioned Local Depths (PaLD)}
+\title{Partitioned Local Depth (PaLD)}
 \usage{
 pald(
   d,

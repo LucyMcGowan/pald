@@ -9,7 +9,7 @@ January 2022
 [![R-CMD-check](https://github.com/LucyMcGowan/pald/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/LucyMcGowan/pald/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
-This package provides an implementation of the Partitioned Local Depths
+This package provides an implementation of the Partitioned Local Depth
 (PaLD) approach which consists of a measure of *local depth* and the
 *cohesion* of a point to another which, together with a universal
 threshold for distinguishing strong and weak ties, may be used to reveal
@@ -47,7 +47,7 @@ library(pald)
 
 ## Input
 
-The input for the Partitioned Local Depths (PaLD) approach is a distance
+The input for the Partitioned Local Depth (PaLD) approach is a distance
 matrix (or `dist` object) associated with a finite collection of data
 points. Throughout, no distributional assumptions, iterative procedures
 nor optimization criteria are employed.
@@ -390,7 +390,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from a44fbe8:
+#> + 8/87 vertices, named, from c8a0516:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 

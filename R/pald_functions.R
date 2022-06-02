@@ -478,7 +478,7 @@ community_clusters <- function(c) {
     cluster = cl
   )
 }
-#' Partitioned Local Depths (PaLD)
+#' Partitioned Local Depth (PaLD)
 #'
 #' A wrapper function which computes the cohesion matrix, local depths,
 #' community graphs and provides a plot of the community graphs with connected

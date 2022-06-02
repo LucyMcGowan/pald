@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/LucyMcGowan/pald/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/LucyMcGowan/pald/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
-This package provides an implementation of the Partitioned Local Depths (PaLD) approach which consists of a measure of *local depth* and the *cohesion* of a point to another which, together with a universal threshold for distinguishing strong and weak ties, may be used to reveal local and global structure in data.  No extraneous inputs, distributional assumptions, iterative procedures nor optimization criteria are employed. This package includes functions for computing local depths and cohesion matrices as well as flexible functions for plotting community networks and displays of cohesion against distance. 
+This package provides an implementation of the Partitioned Local Depth (PaLD) approach which consists of a measure of *local depth* and the *cohesion* of a point to another which, together with a universal threshold for distinguishing strong and weak ties, may be used to reveal local and global structure in data.  No extraneous inputs, distributional assumptions, iterative procedures nor optimization criteria are employed. This package includes functions for computing local depths and cohesion matrices as well as flexible functions for plotting community networks and displays of cohesion against distance. 
 
 For further discussion of the perspective, including some theoretical results and applications, see: 
 
@@ -52,7 +52,7 @@ library(pald)
 
 ## Input
 
-The input for the Partitioned Local Depths (PaLD) approach is a distance matrix (or `dist` object) associated with a finite collection of data points.  Throughout, no distributional assumptions, iterative procedures nor optimization criteria are employed.  
+The input for the Partitioned Local Depth (PaLD) approach is a distance matrix (or `dist` object) associated with a finite collection of data points.  Throughout, no distributional assumptions, iterative procedures nor optimization criteria are employed.  
 
 The only information extracted from the distance matrix are within-triplet dissimilarity comparisons. As a result, outputs are unaffected by monotone transformations of the collection of distances (e.g., $\log_2$). Further, one may transform any measure of similarity, $s(x, y)$, to a measure of dissimilarity, $d(x,y)$, via any order-reversing monotone transformation, for instance by taking $d(x, y) = 1/(1 + s(x, y))$. This provides the user some flexibility in the choice of dissimilarity (e.g., triangle inequality is not required) and care should be taken at this stage.  
 

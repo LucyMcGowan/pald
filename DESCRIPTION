@@ -1,5 +1,5 @@
 Package: pald
-Title: Partitioned Local Depths for Community Structure in Data
+Title: Partitioned Local Depth for Community Structure in Data
 Version: 0.0.2
 Authors@R: 
     c(person("Katherine", "Moore", email = "kmoore@amherst.edu", role = c("aut"),
@@ -7,7 +7,7 @@ Authors@R:
     person("Kenneth", "Berenhaut", email = "berenhks@wfu.edu", role = c("aut")),
     person("Lucy", "D'Agostino McGowan", email = "lucydagostino@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7297-9359")))
-Description: Implementation of the Partitioned Local Depths (PaLD) 
+Description: Implementation of the Partitioned Local Depth (PaLD) 
     approach which provides a measure of local depth and the cohesion of a point 
     to another which  (together with a universal threshold for distinguishing 
     strong and weak ties) may be used to reveal local and global structure in 

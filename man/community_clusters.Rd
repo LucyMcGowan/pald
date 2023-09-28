@@ -14,7 +14,7 @@ community_clusters(c)
 A data frame with two columns:
 \itemize{
 \item \code{point}: The points from cohesion matrix \code{c}
-\item \code{cluster}: The (community) cluster labels
+\item \code{community}: The community cluster labels
 }
 }
 \description{

@@ -55,15 +55,15 @@ nor optimization criteria are employed.
 The only information extracted from the distance matrix are
 within-triplet dissimilarity comparisons. As a result, outputs are
 unaffected by monotone transformations of the collection of distances
-(e.g., log<sub>2</sub>). Further, one may transform any measure of
-similarity, *s*(*x*,*y*), to a measure of dissimilarity, *d*(*x*,*y*),
-via any order-reversing monotone transformation, for instance by taking
-*d*(*x*,*y*) = 1/(1+*s*(*x*,*y*)). This provides the user some
-flexibility in the choice of dissimilarity (e.g., triangle inequality is
-not required) and care should be taken at this stage.
+(e.g., $\log_2$). Further, one may transform any measure of similarity,
+$s(x, y)$, to a measure of dissimilarity, $d(x,y)$, via any
+order-reversing monotone transformation, for instance by taking
+$d(x, y) = 1/(1 + s(x, y))$. This provides the user some flexibility in
+the choice of dissimilarity (e.g., triangle inequality is not required)
+and care should be taken at this stage.
 
 The function `dist()` from the `stats` package converts an input data
-frame (with *n* rows) into an *n* × *n* distance matrix. In Euclidean
+frame (with $n$ rows) into an $n \times n$ distance matrix. In Euclidean
 examples here, we will use the default Euclidean distance.
 
 ## A Small Example
@@ -85,6 +85,11 @@ par(mfrow = c(1, 2), pty = "s")
 
 D <- dist(exdata1)
 pald_results <- pald(D, emph_strong = 1, vertex.label.cex = 3)
+```
+
+<img src="man/figures/README-pald-1.png" width="100%" />
+
+``` r
 
 ###
 
@@ -104,7 +109,7 @@ text(exdata1 + .23,
      cex = .8)
 ```
 
-<img src="man/figures/README-pald-1.png" width="100%" />
+<img src="man/figures/README-pald-2.png" width="100%" />
 
 The wrapper function `pald()` returns a list containing: the cohesion
 matrix, local depths, (community) clusters, the threshold for
@@ -126,10 +131,10 @@ Cohesion reflects relationship strength from the perspective of relative
 position, see (Berenhaut, Moore, and Melvin 2022). To begin PaLD
 analysis, we must first compute the matrix of cohesion values from the
 input distance matrix or `dist` object. Note that cohesion is not
-symmetric. The values, *C*\[*x*,*w*\], in the cohesion matrix are
+symmetric. The values, $C[x, w]$, in the cohesion matrix are
 interpretable probabilities which capture the strength of the alignment
-of *w* to *x*. The sum of the cohesion matrix is always equal to *n*/2
-(where *n* is the number of data points).
+of $w$ to $x$. The sum of the cohesion matrix is always equal to $n/2$
+(where $n$ is the number of data points).
 
 ``` r
 D <- dist(exdata1)
@@ -184,10 +189,9 @@ strong_threshold(C)
 ```
 
 Pairs of points for which mutual cohesion (i.e.,
-min {*C*<sub>*x*, *w*</sub>, *C*<sub>*w*, *x*</sub>}) is greater than
-the above threshold are considered to be \`\`strongly cohesive.” The
-thresholded and symmetrized cohesion matrix can be obtained using the
-function ‘cohesion_strong.’
+$\min\{C_{x, w}, C_{w, x}$}) is greater than the above threshold are
+considered to be \`\`strongly cohesive.” The thresholded and symmetrized
+cohesion matrix can be obtained using the function ‘cohesion_strong.’
 
 ``` r
 round(cohesion_strong(C), 4)
@@ -209,11 +213,10 @@ round(cohesion_strong(C), 4)
 The overall structure of the data can be observed via the networks
 obtained from cohesion (referred to here as “community graphs”). The
 community graph is a symmetric, weighted graph which is obtained from
-symmetrizing the cohesion matrix (using
-min {*C*<sub>*x*, *w*</sub>, *C*<sub>*w*, *x*</sub>}) and removing
-self-loops. The “community cluster graph” is the subgraph consisting of
-only the edges for which mutual cohesion greater than the above
-threshold.
+symmetrizing the cohesion matrix (using $\min\{C_{x, w}, C_{w, x}\}$)
+and removing self-loops. The “community cluster graph” is the subgraph
+consisting of only the edges for which mutual cohesion greater than the
+above threshold.
 
 The connected components of the community cluster graph, `G_strong`, are
 referred to the (community) clusters of the data. Note that no
@@ -374,7 +377,7 @@ plot_community_graphs(
 <img src="man/figures/README-lang-1.png" width="100%" />
 
 One could alternatively use the wrapper function:
-`pald(cognate_dist, emph_strong = 3, edge_width_factor = 30, vertex.label = lang_lab_subset, vertex.label.cex = .65, vertex.size = 3)`.
+$\texttt{pald(cognate_dist, emph_strong = 3, edge_width_factor = 30, vertex.label = lang_lab_subset, vertex.label.cex = .65, vertex.size = 3)}$.
 It will return a list containing: the cohesion matrix, local depths,
 (community) clusters, the threshold for identifying strong ties, the
 thresholded and symmetrized cohesion matrix, the community graph whose
@@ -390,7 +393,7 @@ cohesion) and can be found directly from the cohesion matrix.
 library(igraph)
 G_strong_lang <- community_graphs(C_lang)$G_strong
 neighbors(G_strong_lang, "French")
-#> + 8/87 vertices, named, from c8a0516:
+#> + 8/87 vertices, named, from 8cc26e0:
 #> [1] Italian         Ladin           Provencal       Walloon        
 #> [5] French_Creole_C French_Creole_D Spanish         Catalan
 
@@ -409,7 +412,7 @@ density, see discussion in (Berenhaut, Moore, and Melvin 2022). Note
 that PaLD was able to detect the eight natural groups within the data
 without the use of any additional inputs (e.g., number of clusters) nor
 optimization criteria. Despite providing the “correct” number of
-clusters (i.e., *k* = 8) both *k*-means and hierarchical clustering did
+clusters (i.e., $k = 8$) both *k*-means and hierarchical clustering did
 not give the desired result.
 
 ``` r
@@ -432,11 +435,6 @@ plot_community_graphs(
   edge_width_factor = 2,
   vertex.size = 5
 )
-```
-
-<img src="man/figures/README-vary-d-1.png" width="100%" />
-
-``` r
 ### The cluster vector is provided by `pald' and also may be computed via:
 library(igraph)
 cluster_graph <- community_graphs(C3)$G_strong
@@ -447,8 +445,10 @@ table(clusters(cluster_graph)$membership)
 #> 40 40 60 20 20 20 20 20
 ```
 
+<img src="man/figures/README-vary-d-1.png" width="100%" />
+
 Here are the results for the data obtained from *k*-means and
-hierarchical clustering when *k* = 8.
+hierarchical clustering when $k = 8$.
 
 ``` r
 par(mfrow = c(1, 2), pty = "s")

@@ -110,6 +110,7 @@ Each time the function `pald()` is called, the matrix of cohesion values is re-c
 
 
 ## Cohesion Matrix
+
 Cohesion reflects relationship strength from the perspective of relative position, see [@bmm22]. To begin PaLD analysis, we must first compute the matrix of cohesion values from the input distance matrix or `dist` object.  Note that cohesion is not symmetric.  The values, $C[x, w]$, in the cohesion matrix are interpretable probabilities which capture the strength of the alignment of $w$ to $x$.  The sum of the cohesion matrix is always equal to $n/2$ (where $n$ is the number of data points).
 
 ```{r cohesion}

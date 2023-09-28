@@ -462,7 +462,7 @@ plot_community_graphs <- function(c,
 #'
 #' @return A data frame with two columns:
 #'  * `point`: The points from cohesion matrix `c`
-#'  * `cluster`: The (community) cluster labels
+#'  * `community`: The community cluster labels
 #'
 #' @examples
 #' D <- dist(exdata2)
@@ -475,7 +475,7 @@ community_clusters <- function(c) {
   cl <- igraph::clusters(c_graphs$G_strong)$membership
   data.frame(
     point = names(cl),
-    cluster = cl
+    community = cl
   )
 }
 #' Partitioned Local Depth (PaLD)

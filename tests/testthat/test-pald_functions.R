@@ -57,5 +57,5 @@ test_that("community_clusters works", {
   D <- dist(exdata1)
   C <- cohesion_matrix(D)
   cc <- community_clusters(C)
-  expect_equal(cc$cluster, c(1, 1, 1, 1, 2, 2, 2, 3))
+  expect_equal(cc$community, c(1, 1, 1, 1, 2, 2, 2, 3))
 })

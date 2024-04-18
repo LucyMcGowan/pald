@@ -555,6 +555,7 @@ pald <- function(d,
                  emph_strong = 2,
                  edge_width_factor = 50,
                  colors = NULL,
+                 layout = NULL,
                  ...) {
 
   d <- check_dist(d)
@@ -568,6 +569,7 @@ pald <- function(d,
                           emph_strong = emph_strong,
                           edge_width_factor = edge_width_factor,
                           colors = colors,
+                          layout = layout %||% c_graphs$layout,
                           ...
     )
   }
@@ -581,7 +583,7 @@ pald <- function(d,
            C_strong = cohesion_strong(c),
            G = c_graphs$G,
            G_strong = c_graphs$G_strong,
-           layout = c_graphs$layout
+           layout = layout %||% c_graphs$layout
       )
     )
   )

@@ -507,10 +507,10 @@ community_clusters <- function(c) {
 #'   Default: `50`.
 #' @param colors A vector of display colors, if none is given a default list
 #'   (of length 24) is provided.
+#' @param layout A layout for the graph.  If none is specified, FR-graph
+#'   drawing algorithm is used.
 #' @param ... Optional parameters to pass to the [`igraph::plot.igraph`].
 #'  function. Some commonly passed arguments include:
-#'    * `layout`  A layout for the graph.  If none is specified, FR-graph
-#'   drawing algorithm is used.
 #'    * `vertex.label` A vector containing label names. If none is given,
 #'    the rownames of `c` are used
 #'    * `vertex.size` A numeric value for vertex size (default = `1`)

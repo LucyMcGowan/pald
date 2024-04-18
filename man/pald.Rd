@@ -12,6 +12,7 @@ pald(
   emph_strong = 2,
   edge_width_factor = 50,
   colors = NULL,
+  layout = NULL,
   ...
 )
 }
@@ -37,11 +38,12 @@ Default: \code{50}.}
 \item{colors}{A vector of display colors, if none is given a default list
 (of length 24) is provided.}
 
+\item{layout}{A layout for the graph.  If none is specified, FR-graph
+drawing algorithm is used.}
+
 \item{...}{Optional parameters to pass to the \code{\link[igraph:plot.igraph]{igraph::plot.igraph}}.
 function. Some commonly passed arguments include:
 \itemize{
-\item \code{layout}  A layout for the graph.  If none is specified, FR-graph
-drawing algorithm is used.
 \item \code{vertex.label} A vector containing label names. If none is given,
 the rownames of \code{c} are used
 \item \code{vertex.size} A numeric value for vertex size (default = \code{1})

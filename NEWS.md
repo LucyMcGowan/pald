@@ -1,3 +1,7 @@
+# pald 0.0.4
+
+* Update `pald` to allow for layouts to be specified and correctly passed to the output
+
 # pald 0.0.3
 
 * Change output in `community_clusters` to be a data frame with two columns: `point` and `community`

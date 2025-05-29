@@ -1,3 +1,7 @@
+# pald 0.0.5
+
+* Update deprecated `igraph::clusters` to `igraph::components`
+
 # pald 0.0.4
 
 * Update `pald` to allow for layouts to be specified and correctly passed to the output

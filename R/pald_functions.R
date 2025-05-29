@@ -414,7 +414,7 @@ plot_community_graphs <- function(c,
 
   # Color the edges of G_strong according to the connected components of the
   # graph
-  cluster_labels <- igraph::clusters(c_graphs$G_strong)$membership
+  cluster_labels <- igraph::components(c_graphs$G_strong)$membership
 
   # if no layout is given, the FR layout for G is used
   dots[["layout"]] <- dots[["layout"]] %||% c_graphs$layout
@@ -472,7 +472,7 @@ plot_community_graphs <- function(c,
 community_clusters <- function(c) {
   check_cohesion_matrix(c)
   c_graphs <- community_graphs(c)
-  cl <- igraph::clusters(c_graphs$G_strong)$membership
+  cl <- igraph::components(c_graphs$G_strong)$membership
   data.frame(
     point = names(cl),
     community = cl
@@ -578,7 +578,7 @@ pald <- function(d,
     invisible(
       list(C = c,
            local_depths = local_depths(c),
-           clusters = igraph::clusters(c_graphs$G_strong)$membership,
+           clusters = igraph::components(c_graphs$G_strong)$membership,
            threshold = strong_threshold(c),
            C_strong = cohesion_strong(c),
            G = c_graphs$G,
@@ -661,7 +661,7 @@ dist_cohesion_plot <- function(d,
 
   c_graphs <- community_graphs(c)
 
-  pald_clusters <- igraph::clusters(c_graphs$G_strong)$membership
+  pald_clusters <- igraph::components(c_graphs$G_strong)$membership
 
   c_colors <- matrix(colors[pald_clusters], n, n)
 
